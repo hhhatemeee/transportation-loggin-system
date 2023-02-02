@@ -5,6 +5,7 @@ import { Box, Drawer } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import { DRAWER_WIDTH } from '../../constants'
+import Logo from '../Logo/Logo'
 
 // import { NavList } from '../NavList'
 // import { ProfileMenu } from '../ProfileMenu'
@@ -60,7 +61,10 @@ export const Sidebar: FC<SidebarProps> = ({ children, open, onClose }) => {
             },
           }}
         >
-          <DrawerHeader>
+          <DrawerHeader sx={{ justifyContent: 'space-between' }}>
+            <Box ml={2}>
+              <Logo />
+            </Box>
             <IconButton onClick={onClose}>
               <ChevronLeftIcon />
             </IconButton>

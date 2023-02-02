@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import { DRAWER_WIDTH } from '../../constants'
+import { AccountPopover } from '../AccountPopover'
 
 type AppBarProps = {
   open: boolean
@@ -65,10 +66,11 @@ export const Header: FC<AppBarProps> = ({ open, onOpen }) => {
             </Box>
           </Grid>
           <Grid item>
+            SUPER LOGO
+          </Grid>
+          <Grid item>
             <Grid container alignItems={'center'}>
-              <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color='inherit'>
-
-              </IconButton>
+              <AccountPopover />
             </Grid>
           </Grid>
         </Grid>

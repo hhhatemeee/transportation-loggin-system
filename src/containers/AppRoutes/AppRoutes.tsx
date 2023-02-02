@@ -1,5 +1,5 @@
-import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import { EmptyPage } from "../../pages/EmptyPage";
 import { Login } from "../../pages/Login";
 import { AppLayout } from "../AppLayout";
