@@ -6,6 +6,8 @@ import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import { DRAWER_WIDTH } from '../../constants'
 import Logo from '../Logo/Logo'
+import { NavList } from '../NavList'
+import { ItemType } from '../../types/common'
 
 // import { NavList } from '../NavList'
 // import { ProfileMenu } from '../ProfileMenu'
@@ -41,9 +43,10 @@ type SidebarProps = {
   children: ReactNode
   open: boolean
   onClose: () => void
+  options: ItemType[]
 }
 
-export const Sidebar: FC<SidebarProps> = ({ children, open, onClose }) => {
+export const Sidebar: FC<SidebarProps> = ({ children, open, onClose, options }) => {
   return (
     <Main open={open}>
       <Box sx={{ display: 'flex' }}>
@@ -68,6 +71,9 @@ export const Sidebar: FC<SidebarProps> = ({ children, open, onClose }) => {
               <ChevronLeftIcon />
             </IconButton>
           </DrawerHeader>
+          <Box px={1}>
+            <NavList options={options} />
+          </Box>
           {/* <ProfileMenu />
           <NavList
             isChild={false}

@@ -3,6 +3,7 @@ import { FC, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
+import { OPTIONS } from './menuConfig'
 
 export const AppLayout: FC = () => {
   const [isOpen, setIsOpen] = useState(true)
@@ -12,7 +13,7 @@ export const AppLayout: FC = () => {
     <>
       <CssBaseline />
       <Header onOpen={handleOpen} open={isOpen} />
-      <Sidebar open={isOpen} onClose={handleOpen}>
+      <Sidebar options={OPTIONS} open={isOpen} onClose={handleOpen}>
         <Container maxWidth={false}>
           <Outlet />
         </Container>

@@ -6,7 +6,7 @@ import { FC } from 'react'
 export const AccountPopover: FC = () => {
   return (
     <Chip
-      onClick={() => console.log(123)}
+      onClick={() => console.log()}
       avatar={
         <Avatar variant='circular' sx={{ border: 1, borderColor: deepPurple[300] }}>
           A
