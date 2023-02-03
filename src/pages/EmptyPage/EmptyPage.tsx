@@ -1,6 +1,5 @@
-import React from "react";
+import React from 'react'
 
 export const EmptyPage = () => {
-  return <div>EmptyPage</div>;
-};
-
+  return <div>EmptyPage</div>
+}

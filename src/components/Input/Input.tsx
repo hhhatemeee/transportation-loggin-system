@@ -21,6 +21,5 @@ export const Input: FC<InputProps> = ({ errorMessage, ...props }) => {
         </Grid>
       )}
     </Grid>
-
   )
 }

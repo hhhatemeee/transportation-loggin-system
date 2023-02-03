@@ -1,10 +1,10 @@
-import { FormInputProps } from "../components/FormGenerator/FormInput"
+import { FormInputProps } from '../components/FormGenerator/FormInput'
 
 export enum GENERATOR_INPUT_TYPE {
   INPUT = 'INPUT',
   TEXTFIELD = 'TEXTFIELD',
   BUTTON = 'BUTTON',
-  CHECKBOX = 'CHECKBOX'
+  CHECKBOX = 'CHECKBOX',
 }
 
 type FormInputRowType = {

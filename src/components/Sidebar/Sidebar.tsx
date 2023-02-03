@@ -11,7 +11,6 @@ import Logo from '../Logo/Logo'
 // import { ProfileMenu } from '../ProfileMenu'
 // import { NavOptionProps } from '../../types'
 
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',

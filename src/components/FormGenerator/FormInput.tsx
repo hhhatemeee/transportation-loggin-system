@@ -8,7 +8,6 @@ import { TextFieldController } from '../../controllers/TextFieldController'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 import { InputController } from '../../controllers/InputController'
 
-
 type CommonFormInputProps = {
   className?: string
   rules?: RegisterOptions
@@ -58,12 +57,9 @@ export const FormInput: FC<FormInputProps> = ({
   sx,
   className,
   value,
-  labelOver
+  labelOver,
 }) => {
-
-
   const renderInput = (): ReactElement => {
-
     switch (inputType) {
       case GENERATOR_INPUT_TYPE.TEXTFIELD:
         return (

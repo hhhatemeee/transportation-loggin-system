@@ -5,7 +5,5 @@ import { TextField as MUITextField, TextFieldProps as MUITextFieldProps } from '
 export type TextFieldProps = MUITextFieldProps
 
 export const TextField: FC<TextFieldProps> = props => {
-  return (
-    <MUITextField {...props} sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2.5 } }} />
-  )
+  return <MUITextField {...props} sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2.5 } }} />
 }

@@ -34,7 +34,9 @@ export const InputController: FC<InputControllerProps> = ({
           onBlur={onBlur}
           onChange={e => {
             const formValue = maxLength ? e.target.value.slice(0, maxLength) : e.target.value
-            onChange(replacePattern && replaceBy ? formValue.replace(replacePattern, replaceBy) : formValue)
+            onChange(
+              replacePattern && replaceBy ? formValue.replace(replacePattern, replaceBy) : formValue
+            )
           }}
           errorMessage={error?.message}
           {...props}

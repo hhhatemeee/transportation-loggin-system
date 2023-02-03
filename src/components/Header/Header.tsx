@@ -54,10 +54,7 @@ export const Header: FC<AppBarProps> = ({ open, onOpen }) => {
               <Grid container alignItems='center'>
                 <Grid item>
                   {!open && (
-                    <IconButton
-                      sx={{ mr: 3 }}
-                      onClick={handleClick}
-                    >
+                    <IconButton sx={{ mr: 3 }} onClick={handleClick}>
                       <MenuIcon />
                     </IconButton>
                   )}
@@ -65,9 +62,7 @@ export const Header: FC<AppBarProps> = ({ open, onOpen }) => {
               </Grid>
             </Box>
           </Grid>
-          <Grid item>
-            SUPER LOGO
-          </Grid>
+          <Grid item>SUPER LOGO</Grid>
           <Grid item>
             <Grid container alignItems={'center'}>
               <AccountPopover />

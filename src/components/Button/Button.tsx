@@ -6,7 +6,7 @@ export type ButtonProps = MUIButtonProps
 
 export const Button: FC<ButtonProps> = props => {
   return (
-    <MUIButton data-testid="button" {...props}>
+    <MUIButton data-testid='button' {...props}>
       {props.children}
     </MUIButton>
   )
