@@ -34,7 +34,11 @@ export const NavItem: FC<NavItemType> = ({ children, item, ...props }) => {
   const handleOpen = () => setIsOpen(!isOpen)
 
   return (
-    <Link to='/empty' component={item.options?.length ? Box : RouterLink} sx={textStyles}>
+    <Link
+      to={item.path || '/empty'}
+      component={item.options?.length ? Box : RouterLink}
+      sx={textStyles}
+    >
       <ListItemButton {...props} sx={{ borderRadius: 2, fontSize: 18 }} onClick={handleOpen}>
         <Icon sx={{ mr: 1 }} fontSize={'medium'} style={{ color: grey[500] }}>
           {item.icon}

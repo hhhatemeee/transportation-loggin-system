@@ -62,7 +62,7 @@ export const Header: FC<AppBarProps> = ({ open, onOpen }) => {
               </Grid>
             </Box>
           </Grid>
-          <Grid item>SUPER LOGO</Grid>
+          <Grid item>SUPER NAME SERVICE</Grid>
           <Grid item>
             <Grid container alignItems={'center'}>
               <AccountPopover />
