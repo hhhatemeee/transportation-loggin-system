@@ -11,7 +11,7 @@ type FormLabelProps = {
   control: FormControlLabelProps['control']
 }
 
-export const FormLabel: FC<FormLabelProps> = ({ name, label = '', labelPlacement, control }) => {
+export const FormLabel: FC<FormLabelProps> = ({ label = '', labelPlacement, control }) => {
   return (
     <FormControlLabel
       sx={{

@@ -28,7 +28,7 @@ const textStyles: SxProps<Theme> = {
   textDecoration: 'none',
 }
 
-export const NavItem: FC<NavItemType> = ({ children, item, ...props }) => {
+export const NavItem: FC<NavItemType> = ({ item, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => setIsOpen(!isOpen)
@@ -39,14 +39,19 @@ export const NavItem: FC<NavItemType> = ({ children, item, ...props }) => {
       component={item.options?.length ? Box : RouterLink}
       sx={textStyles}
     >
-      <ListItemButton {...props} sx={{ borderRadius: 2, fontSize: 18 }} onClick={handleOpen}>
+      <ListItemButton
+        selected={item.isSelected}
+        {...props}
+        sx={{ borderRadius: 2, fontSize: 18 }}
+        onClick={handleOpen}
+      >
         <Icon sx={{ mr: 1 }} fontSize={'medium'} style={{ color: grey[500] }}>
           {item.icon}
         </Icon>
         <ListItemText>{item.value}</ListItemText>
       </ListItemButton>
       {item.options?.length && (
-        <Collapse in={isOpen}>
+        <Collapse in={item.isExpanded || isOpen}>
           <NavList options={item.options} isChild />
         </Collapse>
       )}
