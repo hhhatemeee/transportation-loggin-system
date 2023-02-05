@@ -4,4 +4,6 @@ export type ItemType = {
   icon?: string
   options?: ItemType[]
   path?: string
+  isSelected?: boolean
+  isExpanded?: boolean
 }
