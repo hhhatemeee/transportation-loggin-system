@@ -17,7 +17,7 @@ export const AppLayout: FC = () => {
       <CssBaseline />
       <Header onOpen={handleOpen} open={isOpen} />
       <Sidebar options={options} open={isOpen} onClose={handleOpen}>
-        <Container maxWidth={false}>
+        <Container component={'main'} maxWidth={false}>
           <Outlet />
         </Container>
       </Sidebar>

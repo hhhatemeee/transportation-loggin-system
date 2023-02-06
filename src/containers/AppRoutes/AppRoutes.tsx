@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ROUTES } from '../../constants'
 
 import { EmptyPage } from '../../pages/EmptyPage'
+import { History } from '../../pages/History'
 import { Login } from '../../pages/Login'
 import { Registration } from '../../pages/Registration'
 import { RegistrationArrival } from '../../pages/RegistrationArrival'
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             element: <RegistrationDeparture />,
           },
         ],
+      },
+      {
+        path: ROUTES.HISTORY,
+        element: <History />,
       },
     ],
   },
