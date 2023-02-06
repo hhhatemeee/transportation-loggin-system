@@ -35,12 +35,6 @@ const StyledAppBar = styled(MUIAppBar, {
 }))
 
 export const Header: FC<AppBarProps> = ({ open, onOpen }) => {
-  const toggleColorMode = () => {
-    // const newMode = mode === THEME_MODE.LIGHT ? THEME_MODE.DARK : THEME_MODE.LIGHT
-    // dispatch(setThemeMode(newMode))
-    // localStorage.setItem('mode', newMode)
-  }
-
   const handleClick = () => {
     onOpen?.(true)
   }
@@ -62,7 +56,7 @@ export const Header: FC<AppBarProps> = ({ open, onOpen }) => {
               </Grid>
             </Box>
           </Grid>
-          <Grid item>SUPER LOGO</Grid>
+          <Grid item>SUPER NAME SERVICE</Grid>
           <Grid item>
             <Grid container alignItems={'center'}>
               <AccountPopover />

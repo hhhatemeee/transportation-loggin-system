@@ -1,11 +1,11 @@
 import { Box, CssBaseline, Divider, Grid, Typography } from '@mui/material'
 import { deepPurple, grey, indigo } from '@mui/material/colors'
-import React from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../../components/Button'
 
+import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 
@@ -18,6 +18,7 @@ export const Login = () => {
   const methods = useForm<LoginForm>()
   const navigate = useNavigate()
   const { handleSubmit } = methods
+  const { t } = useTranslation()
 
   const handleSignIn = (data: LoginForm) => {
     console.log(data)
@@ -46,25 +47,25 @@ export const Login = () => {
         >
           <Grid container flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
             <Grid item mb={2}>
-              <Typography fontWeight={600}>L O G O</Typography>
+              <Typography fontWeight={600}>{t('logo')}</Typography>
             </Grid>
             <Grid>
               <Grid item container alignItems={'center'} flexDirection={'column'} mb={4}>
                 <Grid item>
                   <Typography fontWeight={600} fontSize={24} color={deepPurple[600]}>
-                    Добро пожаловать
+                    {t('loginPage.welcome')}
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography fontSize={14} color={grey[600]}>
-                    Введите свои учетные данные
+                    {t('loginPage.subTitle')}
                   </Typography>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item mb={3}>
               <Typography fontWeight={500} fontSize={18} color={grey[600]}>
-                Войдите в систему
+                {t('loginPage.singIn')}
               </Typography>
             </Grid>
             <Grid item>
@@ -74,18 +75,18 @@ export const Login = () => {
                     {
                       name: 'login',
                       inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
-                      labelOver: 'Имя пользователя',
+                      labelOver: t('loginPage.form.username.label'),
                       type: 'email',
                       size: 'medium',
-                      rules: { required: 'Не указано имя пользователя' },
+                      rules: { required: t('loginPage.form.username.emptyError') },
                     },
                     {
                       name: 'password',
                       inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
-                      labelOver: 'Пароль',
+                      labelOver: t('loginPage.form.password.label'),
                       type: 'password',
                       size: 'medium',
-                      rules: { required: 'Пароль не указан' },
+                      rules: { required: t('loginPage.form.password.emptyError') },
                     },
                   ]}
                 />
@@ -97,14 +98,14 @@ export const Login = () => {
                   sx={{ bgcolor: deepPurple[600], fontWeight: 600, py: 1 }}
                   fullWidth
                 >
-                  Войти
+                  {t('loginPage.singInBtn')}
                 </Button>
               </Grid>
               <Divider />
             </Grid>
             <Grid item mt={1}>
               <Typography fontSize={14} fontWeight={600} component={'a'} sx={{ cursor: 'pointer' }}>
-                Регистрация
+                {t('loginPage.registration')}
               </Typography>
             </Grid>
           </Grid>

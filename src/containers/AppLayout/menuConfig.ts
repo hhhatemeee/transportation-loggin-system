@@ -1,3 +1,4 @@
+import { ROUTES } from '../../constants'
 import { ItemType } from '../../types/common'
 
 export const OPTIONS: ItemType[] = [
@@ -6,8 +7,8 @@ export const OPTIONS: ItemType[] = [
     value: 'Регистрация',
     icon: 'how_to_reg',
     options: [
-      { id: 0, value: 'Прибытие' },
-      { id: 1, value: 'Убытие' },
+      { id: 0, value: 'Прибытие', path: ROUTES.REGISTRATION_ARRIVAL },
+      { id: 1, value: 'Убытие', path: ROUTES.REGISTRATION_DEPARTURE },
     ],
   },
   {
