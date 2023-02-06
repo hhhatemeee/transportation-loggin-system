@@ -11,6 +11,9 @@ import { InputController } from '../../controllers/InputController'
 import { DatePickerRangeController } from '../../controllers/DateTimePickerController/DatePickerRangeController'
 import { DateRangeValue, LabelRangeType } from '../DatePickerRange'
 import { CheckboxController } from '../../controllers/CheckboxController'
+import { AutoCompleteController } from '../../controllers/AutoCompleteController'
+import { AutocompleteOption } from '../AutoComplete'
+import { DateTimePickerController } from '../../controllers/DateTimePickerController'
 
 type CommonFormInputProps = {
   className?: string
@@ -41,12 +44,23 @@ export type DateRangeFormInputProps = {
   labelRange?: LabelRangeType
 }
 
+type AutoCompleteFormProps = {
+  autocompleteOptions?: AutocompleteOption[]
+  getOptionLabel?: ((option: AutocompleteOption) => string) | undefined
+  isOptionEqualToValue?:
+    | ((option: AutocompleteOption, value: AutocompleteOption) => boolean)
+    | undefined
+  multiple?: boolean
+  getOptionDisabled?: ((option: AutocompleteOption) => boolean) | undefined
+}
+
 export type FormInputProps = {
   name: string
   inputType: GENERATOR_INPUT_TYPE
 } & CommonFormInputProps &
   InputFormProps &
-  DateRangeFormInputProps
+  DateRangeFormInputProps &
+  AutoCompleteFormProps
 
 export const FormInput: FC<FormInputProps> = ({
   rules,
@@ -57,7 +71,7 @@ export const FormInput: FC<FormInputProps> = ({
   disabled,
   placeholder,
   type,
-  size = 'small',
+  size = 'medium',
   replacePattern,
   replaceBy = '',
   maxLengthInput = 255,
@@ -70,6 +84,12 @@ export const FormInput: FC<FormInputProps> = ({
   labelOver,
   labelRange,
   labelLimit = true,
+  autocompleteOptions,
+  getOptionDisabled,
+  getOptionLabel,
+  isOptionEqualToValue,
+  loading,
+  multiple,
 }) => {
   const getValue = () => {
     switch (inputType) {
@@ -142,6 +162,20 @@ export const FormInput: FC<FormInputProps> = ({
             labelRange={labelRange}
           />
         )
+      case GENERATOR_INPUT_TYPE.DATE_TIME_PICKER:
+        return (
+          <DateTimePickerController
+            fullWidth
+            readOnly={readOnly}
+            rules={rules}
+            name={name}
+            disabled={disabled}
+            value={getValue() as string | null}
+            size={size}
+            label={labelOver}
+            className={className}
+          />
+        )
       case GENERATOR_INPUT_TYPE.CHECKBOX:
         return (
           <CheckboxController
@@ -150,6 +184,31 @@ export const FormInput: FC<FormInputProps> = ({
             disabled={disabled}
             value={getValue()}
             sx={sx}
+          />
+        )
+      case GENERATOR_INPUT_TYPE.AUTOCOMPLETE:
+        return (
+          <AutoCompleteController
+            fullWidth
+            size={size}
+            name={name}
+            disableCloseOnSelect={multiple}
+            defaultValue={multiple ? [] : {}}
+            loading={loading}
+            isOptionEqualToValue={isOptionEqualToValue}
+            id={name}
+            getOptionLabel={getOptionLabel}
+            options={autocompleteOptions ?? []}
+            rules={rules}
+            multiple={multiple}
+            disabled={disabled}
+            placeholder={placeholder}
+            value={getValue()}
+            variant={variant}
+            sx={sx}
+            getOptionDisabled={getOptionDisabled}
+            label={labelOver}
+            className={className}
           />
         )
       default:

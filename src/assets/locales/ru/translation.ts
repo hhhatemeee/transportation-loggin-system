@@ -1,5 +1,8 @@
 export const localizationRu = {
   logo: 'L O G O',
+  buttons: {
+    addButton: 'Добавить',
+  },
   registrationPage: {
     title: 'Регистрация',
     form: {
@@ -92,15 +95,77 @@ export const localizationRu = {
   dictionaries: {
     counterparties: {
       title: 'Справочники. Контрагенты',
+      form: {
+        name: {
+          label: 'Название',
+        },
+        payment: {
+          label: 'Расчетный счет',
+        },
+        address: {
+          label: 'Адрес',
+        },
+        bank: {
+          label: 'Банк',
+        },
+        inn: {
+          label: 'ИНН',
+        },
+        bik: {
+          label: 'БИК',
+        },
+        kpp: {
+          label: 'КПП',
+        },
+        ks: {
+          label: 'К/С',
+        },
+      },
     },
     contracts: {
-      title: 'Справочники. Контракты',
+      title: 'Справочники. Договоры',
+      form: {
+        dateStart: {
+          label: 'Дата начала договора',
+        },
+        dateEnd: {
+          label: 'Дата конца договора',
+        },
+        vehicles: {
+          label: 'Транспортные средства',
+        },
+        counterpart: {
+          label: 'Контрагент',
+        },
+      },
     },
     vehicles: {
       title: 'Справочники. Транспортные средства',
+      form: {
+        stateNumber: {
+          label: 'Гос. номер',
+        },
+        model: {
+          label: 'Модель',
+        },
+        STS: {
+          label: 'СТС',
+        },
+        counterpart: {
+          label: 'Контрагент',
+        },
+      },
     },
     services: {
       title: 'Справочники. Услуги',
+      form: {
+        name: {
+          label: 'Наименование',
+        },
+        description: {
+          label: 'Описание',
+        },
+      },
     },
   },
 }

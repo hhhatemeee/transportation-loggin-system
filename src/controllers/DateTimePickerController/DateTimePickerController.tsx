@@ -19,7 +19,13 @@ export const DateTimePickerController: FC<DateTimePickerControllerProps> = ({
       control={control}
       name={name}
       render={({ field: { onChange, value: formValue }, fieldState: { invalid } }) => (
-        <DateTimePicker {...props} error={invalid} value={value ?? formValue} onChange={onChange} />
+        <DateTimePicker
+          {...props}
+          error={invalid}
+          value={value ?? formValue}
+          onChange={onChange}
+          onChangeInput={onChange}
+        />
       )}
       rules={rules}
     />
