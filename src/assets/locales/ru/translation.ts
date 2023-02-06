@@ -89,4 +89,18 @@ export const localizationRu = {
       exportButton: 'Экспорт',
     },
   },
+  dictionaries: {
+    counterparties: {
+      title: 'Справочники. Контрагенты',
+    },
+    contracts: {
+      title: 'Справочники. Контракты',
+    },
+    vehicles: {
+      title: 'Справочники. Транспортные средства',
+    },
+    services: {
+      title: 'Справочники. Услуги',
+    },
+  },
 }

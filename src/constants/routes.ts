@@ -8,4 +8,9 @@ export const ROUTES = {
   REPORTS: '/reports',
   REPORTS_COUNTERPARTIES: '/reports/counterparties',
   REPORTS_STATISTICS: '/reports/statistics',
+  DICTIONARY: '/dictionary',
+  DICTIONARY_COUNTERPARTIES: '/dictionary/counterparties',
+  DICTIONARY_VEHICLES: '/dictionary/vehicles',
+  DICTIONARY_CONTRACTS: '/dictionary/contracts',
+  DICTIONARY_SERVICES: '/dictionary/services',
 }

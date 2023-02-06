@@ -18,3 +18,8 @@ export type ExportCounterpartiesForm = {
 export type ExportStatisticsForm = {
   isExport: boolean
 }
+
+export type DictionaryServicesForm = {
+  name: string
+  description: string
+}
