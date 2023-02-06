@@ -18,17 +18,12 @@ export const OPTIONS: ItemType[] = [
     path: ROUTES.HISTORY,
   },
   {
-    id: 2,
-    value: 'Поиск',
-    icon: 'manage_search',
-  },
-  {
     id: 3,
     value: 'Отчеты',
     icon: 'assessment',
     options: [
-      { id: 0, value: 'Контрагенты' },
-      { id: 1, value: 'Статистика' },
+      { id: 0, value: 'Контрагенты', path: ROUTES.REPORTS_COUNTERPARTIES },
+      { id: 1, value: 'Статистика', path: ROUTES.REPORTS_STATISTICS },
     ],
   },
   {

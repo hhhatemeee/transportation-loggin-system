@@ -9,9 +9,15 @@ type FormLabelProps = {
   label?: string
   labelPlacement: 'end' | 'start' | 'top' | 'bottom'
   control: FormControlLabelProps['control']
+  labelLimit?: boolean
 }
 
-export const FormLabel: FC<FormLabelProps> = ({ label = '', labelPlacement, control }) => {
+export const FormLabel: FC<FormLabelProps> = ({
+  labelLimit,
+  label = '',
+  labelPlacement,
+  control,
+}) => {
   return (
     <FormControlLabel
       sx={{
@@ -30,15 +36,18 @@ export const FormLabel: FC<FormLabelProps> = ({ label = '', labelPlacement, cont
             title={label}
             sx={{
               // mr: 3,
-              width: MIN_LABEL_WIDTH,
               color: grey[700],
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+
               ...(labelPlacement === 'top' && {
                 mb: 1,
                 width: '100%',
                 // whiteSpace: 'nowrap',
+              }),
+              ...(labelLimit && {
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                width: MIN_LABEL_WIDTH,
               }),
             }}
           >

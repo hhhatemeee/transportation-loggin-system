@@ -5,4 +5,7 @@ export const ROUTES = {
   REGISTRATION_ARRIVAL: '/registration/arrival',
   REGISTRATION_DEPARTURE: '/registration/departure',
   HISTORY: '/history',
+  REPORTS: '/reports',
+  REPORTS_COUNTERPARTIES: '/reports/counterparties',
+  REPORTS_STATISTICS: '/reports/statistics',
 }

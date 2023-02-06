@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '../../components/Button'
 import { DataGrid } from '../../components/DataGrid'
 import { FormGenerator } from '../../components/FormGenerator'
+import { PageTitle } from '../../components/PageTitle'
 import { HISTORY_COLUMNS } from '../../constants'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 
@@ -15,11 +16,7 @@ export const History: FC = () => {
 
   return (
     <Grid container flexDirection={'column'}>
-      <Grid item alignSelf={'center'} mb={5}>
-        <Typography variant='h5' fontWeight={'600'}>
-          {t('historyPage.title')}
-        </Typography>
-      </Grid>
+      <PageTitle title={t('historyPage.title')} />
       <Grid container item spacing={1} alignItems={'center'} mb={1}>
         <Grid item flexGrow={1}>
           <FormProvider {...methods}>
