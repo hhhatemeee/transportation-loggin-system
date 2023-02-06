@@ -118,14 +118,14 @@ export const DataGrid: FC<DataGridProps> = ({
     getActions: (params: GridCellParams) => [
       ...(onCopy
         ? [
-          <GridActionsCellItem
-            key={params.id}
-            icon={<ContentCopy />}
-            label={'Copy'}
-            onClick={() => onCopy?.(params)}
-            showInMenu={false}
-          />,
-        ]
+            <GridActionsCellItem
+              key={params.id}
+              icon={<ContentCopy />}
+              label={'Copy'}
+              onClick={() => onCopy?.(params)}
+              showInMenu={false}
+            />,
+          ]
         : []),
       <GridActionsCellItem
         key={params.id}

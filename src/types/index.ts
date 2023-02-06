@@ -1,3 +1,3 @@
 export * from './formGenerator'
 export * from './common'
-export * from './registrationForm'
+export * from './forms'

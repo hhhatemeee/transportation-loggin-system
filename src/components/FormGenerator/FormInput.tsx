@@ -2,11 +2,15 @@ import { FC, FocusEventHandler, ReactElement } from 'react'
 
 import { RegisterOptions } from 'react-hook-form'
 import { Grid, SxProps, Theme } from '@mui/material'
+import moment from 'moment'
 
 import { FormLabel } from './FormLabel'
 import { TextFieldController } from '../../controllers/TextFieldController'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 import { InputController } from '../../controllers/InputController'
+import { DatePickerRangeController } from '../../controllers/DateTimePickerController/DatePickerRangeController'
+import { DateRangeValue, LabelRangeType } from '../DatePickerRange'
+import { CheckboxController } from '../../controllers/CheckboxController'
 
 type CommonFormInputProps = {
   className?: string
@@ -22,6 +26,7 @@ type CommonFormInputProps = {
   variant?: 'outlined' | 'filled' | 'standard'
   sx?: SxProps<Theme>
   labelOver?: string
+  labelLimit?: boolean
 }
 
 type InputFormProps = {
@@ -32,11 +37,16 @@ type InputFormProps = {
   onBlurInput?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 
+export type DateRangeFormInputProps = {
+  labelRange?: LabelRangeType
+}
+
 export type FormInputProps = {
   name: string
   inputType: GENERATOR_INPUT_TYPE
 } & CommonFormInputProps &
-  InputFormProps
+  InputFormProps &
+  DateRangeFormInputProps
 
 export const FormInput: FC<FormInputProps> = ({
   rules,
@@ -58,7 +68,22 @@ export const FormInput: FC<FormInputProps> = ({
   className,
   value,
   labelOver,
+  labelRange,
+  labelLimit = true,
 }) => {
+  const getValue = () => {
+    switch (inputType) {
+      case GENERATOR_INPUT_TYPE.DATE_TIME_PICKER:
+        return typeof value === 'string' ? value : null
+      case GENERATOR_INPUT_TYPE.DATE_RANGE_PICKER:
+        return Array.isArray(value) && !value.some(el => el instanceof Date)
+          ? [moment(value[0]).format(), moment(value[1]).format()]
+          : [null, null]
+      default:
+        return value
+    }
+  }
+
   const renderInput = (): ReactElement => {
     switch (inputType) {
       case GENERATOR_INPUT_TYPE.TEXTFIELD:
@@ -103,6 +128,30 @@ export const FormInput: FC<FormInputProps> = ({
             className={className}
           />
         )
+      case GENERATOR_INPUT_TYPE.DATE_RANGE_PICKER:
+        return (
+          <DatePickerRangeController
+            fullWidth
+            readOnly={readOnly}
+            rules={rules}
+            name={name}
+            disabled={disabled}
+            value={getValue() as [DateRangeValue, DateRangeValue]}
+            size={size}
+            className={className}
+            labelRange={labelRange}
+          />
+        )
+      case GENERATOR_INPUT_TYPE.CHECKBOX:
+        return (
+          <CheckboxController
+            rules={rules}
+            name={name}
+            disabled={disabled}
+            value={getValue()}
+            sx={sx}
+          />
+        )
       default:
         return <></>
     }
@@ -120,6 +169,7 @@ export const FormInput: FC<FormInputProps> = ({
         label={label}
         labelPlacement={labelPlacement}
         control={renderInput()}
+        labelLimit={labelLimit}
       />
     </Grid>
   )

@@ -159,7 +159,6 @@ export const useGridColumnResize = (
     colElementRef.current!.style.width = `${newWidth}px`
     colElementRef.current!.style.minWidth = `${newWidth}px`
     colElementRef.current!.style.maxWidth = `${newWidth}px`
-
     ;[...colCellElementsRef.current!, ...colGroupingElementRef.current!].forEach(element => {
       const div = element as HTMLDivElement
       let finalWidth: `${number}px`

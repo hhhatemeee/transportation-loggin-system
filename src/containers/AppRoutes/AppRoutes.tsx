@@ -7,6 +7,9 @@ import { Login } from '../../pages/Login'
 import { Registration } from '../../pages/Registration'
 import { RegistrationArrival } from '../../pages/RegistrationArrival'
 import { RegistrationDeparture } from '../../pages/RegistrationDeparture'
+import { Reports } from '../../pages/Reports'
+import { ReportsCounterparties } from '../../pages/ReportsCounterparties'
+import { ReportsStatistics } from '../../pages/ReportsStatistics'
 import { AppLayout } from '../AppLayout'
 
 const router = createBrowserRouter([
@@ -38,6 +41,20 @@ const router = createBrowserRouter([
       {
         path: ROUTES.HISTORY,
         element: <History />,
+      },
+      {
+        path: ROUTES.REPORTS,
+        element: <Reports />,
+        children: [
+          {
+            path: ROUTES.REPORTS_COUNTERPARTIES,
+            element: <ReportsCounterparties />,
+          },
+          {
+            path: ROUTES.REPORTS_STATISTICS,
+            element: <ReportsStatistics />,
+          },
+        ],
       },
     ],
   },
