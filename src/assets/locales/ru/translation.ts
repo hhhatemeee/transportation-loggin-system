@@ -37,4 +37,14 @@ export const localizationRu = {
     singInBtn: 'Войти',
     registration: 'Регистрация',
   },
+  historyPage: {
+    title: 'История услуг',
+    columns: {
+      number: 'Номер заказа',
+      stateNumber: 'Гос. номер ТС',
+      date: 'Дата заезда ТС',
+      time: 'Время заезда ТС',
+      service: 'Услуга',
+    },
+  },
 }

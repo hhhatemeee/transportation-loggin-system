@@ -4,4 +4,5 @@ export const ROUTES = {
   REGISTRATION: '/registration',
   REGISTRATION_ARRIVAL: '/registration/arrival',
   REGISTRATION_DEPARTURE: '/registration/departure',
+  HISTORY: '/history',
 }

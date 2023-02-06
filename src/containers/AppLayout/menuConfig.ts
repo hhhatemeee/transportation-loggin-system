@@ -13,11 +13,17 @@ export const OPTIONS: ItemType[] = [
   },
   {
     id: 1,
+    value: 'История',
+    icon: 'history',
+    path: ROUTES.HISTORY,
+  },
+  {
+    id: 2,
     value: 'Поиск',
     icon: 'manage_search',
   },
   {
-    id: 2,
+    id: 3,
     value: 'Отчеты',
     icon: 'assessment',
     options: [
@@ -26,7 +32,7 @@ export const OPTIONS: ItemType[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     value: 'Справочники',
     icon: 'library_books',
     options: [
