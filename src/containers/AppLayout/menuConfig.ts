@@ -31,10 +31,10 @@ export const OPTIONS: ItemType[] = [
     value: 'Справочники',
     icon: 'library_books',
     options: [
-      { id: 0, value: 'Контрагенты' },
-      { id: 1, value: 'ТС' },
-      { id: 2, value: 'Услуги' },
-      { id: 3, value: 'Договоры' },
+      { id: 0, value: 'Контрагенты', path: ROUTES.DICTIONARY_COUNTERPARTIES },
+      { id: 1, value: 'ТС', path: ROUTES.DICTIONARY_VEHICLES },
+      { id: 2, value: 'Услуги', path: ROUTES.DICTIONARY_SERVICES },
+      { id: 3, value: 'Договоры', path: ROUTES.DICTIONARY_CONTRACTS },
     ],
   },
 ]

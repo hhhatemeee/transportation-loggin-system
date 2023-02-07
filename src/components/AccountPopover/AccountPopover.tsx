@@ -1,6 +1,6 @@
 import { Settings } from '@mui/icons-material'
 import { Avatar, Chip } from '@mui/material'
-import { deepPurple, grey } from '@mui/material/colors'
+import { blue, grey } from '@mui/material/colors'
 import { FC } from 'react'
 
 export const AccountPopover: FC = () => {
@@ -8,11 +8,11 @@ export const AccountPopover: FC = () => {
     <Chip
       onClick={() => console.log()}
       avatar={
-        <Avatar variant='circular' sx={{ border: 1, borderColor: deepPurple[300] }}>
+        <Avatar variant='circular' sx={{ border: 1, borderColor: blue[600] }}>
           A
         </Avatar>
       }
-      label={<Settings sx={{ display: 'flex', color: deepPurple[600] }} />}
+      label={<Settings color='primary' sx={{ display: 'flex' }} />}
       size={'medium'}
       variant={'filled'}
       sx={{

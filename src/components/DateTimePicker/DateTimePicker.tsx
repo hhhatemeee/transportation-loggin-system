@@ -15,6 +15,7 @@ export type DateTimePickerProps = {
   fullWidth?: boolean
   onBlur?: (value: string) => void
   onChange?: (value: string) => void
+  onChangeInput?: (value: string) => void
   size?: 'small' | 'medium'
 } & Omit<MUIDateTimePickerProps<unknown, unknown>, 'renderInput' | 'onChange'>
 
@@ -23,6 +24,7 @@ export const DateTimePicker: FC<DateTimePickerProps> = ({
   value,
   onBlur,
   onChange,
+  onChangeInput,
   ...props
 }) => {
   return (
@@ -38,6 +40,9 @@ export const DateTimePicker: FC<DateTimePickerProps> = ({
             fullWidth={props.fullWidth}
             error={props.error}
             size={size}
+            onChange={({ target: { value } }) =>
+              isMoment(value) && onChangeInput?.(value.toISOString())
+            }
             {...params}
             inputProps={{ ...params.inputProps, 'data-testid': 'date-time-picker' }}
           />
