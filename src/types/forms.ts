@@ -4,11 +4,20 @@ export type STSForm = {
   code: string
 }
 
+export type LoginForm = {
+  login: string
+  password: string
+}
+
 export type StateNumberForm = STSForm
+
+export type HistoryForm = {
+  stateNumber: string
+}
 
 export type CounterpartiesForm = {
   counterparties: string
-  date: string[]
+  date: [string, string] | [null, string] | [string, null] | [null, null]
 }
 
 export type ExportCounterpartiesForm = {
@@ -49,4 +58,16 @@ export type DictionaryCounterpartiesForm = {
   bik: string
   kpp: string
   ks: string
+}
+
+export type RegistrationOrderForm = {
+  stateNumber: string
+  carBrand: string
+  counterpart: string
+  dateStart: string | null
+  dateEnd: string | null
+  listNumber: string
+  fio: string
+  services: AutocompleteOption | null
+  comment: string
 }

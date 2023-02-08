@@ -10,7 +10,9 @@ type FormingReportProps = {
   onSubmit: (data: CounterpartiesForm) => void
 }
 export const FormingReport: FC<FormingReportProps> = ({ onSubmit }) => {
-  const methods = useForm<CounterpartiesForm>()
+  const methods = useForm<CounterpartiesForm>({
+    defaultValues: { counterparties: '', date: [null, null] },
+  })
   const { handleSubmit } = methods
 
   return (

@@ -8,11 +8,11 @@ import { DataGrid } from '../../components/DataGrid'
 import { FormGenerator } from '../../components/FormGenerator'
 import { PageTitle } from '../../components/PageTitle'
 import { HISTORY_COLUMNS } from '../../constants'
-import { GENERATOR_INPUT_TYPE } from '../../types'
+import { GENERATOR_INPUT_TYPE, HistoryForm } from '../../types'
 
 export const History: FC = () => {
   const { t } = useTranslation()
-  const methods = useForm()
+  const methods = useForm<HistoryForm>({ defaultValues: { stateNumber: '' } })
 
   return (
     <Grid container flexDirection={'column'}>
@@ -23,7 +23,7 @@ export const History: FC = () => {
             <FormGenerator
               inputs={[
                 {
-                  name: 'stateNubmer',
+                  name: 'stateNumber',
                   inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                   size: 'medium',
                   labelOver: 'Гос. Номер',

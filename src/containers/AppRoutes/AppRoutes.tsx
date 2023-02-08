@@ -11,6 +11,7 @@ import { Login } from '../../pages/Login'
 import { Registration } from '../../pages/Registration'
 import { RegistrationArrival } from '../../pages/RegistrationArrival'
 import { RegistrationDeparture } from '../../pages/RegistrationDeparture'
+import { RegistrationOrder } from '../../pages/RegistrationOrder'
 import { Reports } from '../../pages/Reports'
 import { ReportsCounterparties } from '../../pages/ReportsCounterparties'
 import { ReportsStatistics } from '../../pages/ReportsStatistics'
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
           {
             path: ROUTES.REGISTRATION_DEPARTURE,
             element: <RegistrationDeparture />,
+          },
+          {
+            path: ROUTES.REGISTRATION_ORDER,
+            element: <RegistrationOrder />,
           },
         ],
       },
