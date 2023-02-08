@@ -1,4 +1,4 @@
-import i18next from 'i18next'
+import i18next from '../i18n'
 
 export const HISTORY_COLUMNS = [
   { field: 'number', headerName: i18next.t('historyPage.columns.number'), flex: 1, minWidth: 50 },

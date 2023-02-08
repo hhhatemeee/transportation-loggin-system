@@ -22,6 +22,21 @@ export const localizationRu = {
     arrival: {
       submitButton: 'Прибыл',
     },
+    order: {
+      title: 'Заполнение заказа',
+      form: {
+        stateNumber: 'Гос. номер',
+        carBrand: 'Марка автомобиля',
+        counterpart: 'Контрагент',
+        dateStart: 'Дата заезда',
+        dateEnd: 'Дата выезда',
+        listNumber: 'Номер путевого листа',
+        fio: 'ФИО водителя',
+        services: 'Услуги',
+        comment: 'Комментарий',
+      },
+      submitButton: 'Зарегистрировать',
+    },
   },
   loginPage: {
     welcome: 'Добро пожаловать',

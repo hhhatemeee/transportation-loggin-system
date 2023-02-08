@@ -3,6 +3,7 @@ export const ROUTES = {
   LOGIN: '/login',
   REGISTRATION: '/registration',
   REGISTRATION_ARRIVAL: '/registration/arrival',
+  REGISTRATION_ORDER: '/registration/arrival/:code',
   REGISTRATION_DEPARTURE: '/registration/departure',
   HISTORY: '/history',
   REPORTS: '/reports',

@@ -7,15 +7,12 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
-import { GENERATOR_INPUT_TYPE } from '../../types'
+import { GENERATOR_INPUT_TYPE, LoginForm } from '../../types'
 
-type LoginForm = {
-  login: string
-  password: string
-}
+const defaultValues = { login: '', password: '' }
 
 export const Login = () => {
-  const methods = useForm<LoginForm>()
+  const methods = useForm<LoginForm>({ defaultValues })
   const navigate = useNavigate()
   const { handleSubmit } = methods
   const { t } = useTranslation()

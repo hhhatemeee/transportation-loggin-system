@@ -13,7 +13,7 @@ type STSProps = {
 }
 
 export const STS: FC<STSProps> = ({ onSubmit, submitBtnText }) => {
-  const methods = useForm<STSForm>()
+  const methods = useForm<STSForm>({ defaultValues: { code: '' } })
   const { t } = useTranslation()
   const { handleSubmit } = methods
 

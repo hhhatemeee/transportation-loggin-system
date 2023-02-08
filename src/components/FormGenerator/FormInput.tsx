@@ -128,6 +128,30 @@ export const FormInput: FC<FormInputProps> = ({
             className={className}
           />
         )
+      case GENERATOR_INPUT_TYPE.TEXTAREA:
+        return (
+          <TextFieldController
+            multiline
+            rows={5}
+            label={labelOver}
+            fullWidth
+            onBlur={onBlurInput}
+            size={size}
+            placeholder={placeholder ?? placeholder}
+            name={name}
+            InputProps={{ readOnly: readOnly }}
+            rules={rules}
+            disabled={disabled}
+            type={type}
+            maxLength={maxLengthInput}
+            replacePattern={replacePattern}
+            replaceBy={replaceBy}
+            value={value}
+            variant={variant}
+            sx={sx}
+            className={className}
+          />
+        )
       case GENERATOR_INPUT_TYPE.INPUT:
         return (
           <InputController

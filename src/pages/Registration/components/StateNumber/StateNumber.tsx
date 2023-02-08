@@ -13,7 +13,7 @@ type StateNumberProps = {
 }
 
 export const StateNumber: FC<StateNumberProps> = ({ onSubmit, submitBtnText }) => {
-  const methods = useForm<StateNumberForm>()
+  const methods = useForm<StateNumberForm>({ defaultValues: { code: '' } })
   const { t } = useTranslation()
   const { handleSubmit } = methods
 
