@@ -5,7 +5,7 @@ export type STSForm = {
 }
 
 export type LoginForm = {
-  login: string
+  username: string
   password: string
 }
 
