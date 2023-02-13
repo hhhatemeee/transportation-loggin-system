@@ -1,5 +1,7 @@
 import React from 'react'
+import { useAppSelector } from '../../hooks/redux'
 
 export const EmptyPage = () => {
-  return <div>EmptyPage</div>
+  const user = useAppSelector(state => state.auth.user)
+  return <div>{user?.firstname} {user?.lastname}</div>
 }

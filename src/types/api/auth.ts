@@ -10,7 +10,7 @@ export type ReturnLoginType = {
 
 export type AuthState = {
   user: UserType | null
-  token: string | null
+  isAuth: boolean
 }
 
 export type SetUserPayloadAction = {

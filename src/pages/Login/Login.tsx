@@ -1,5 +1,6 @@
 import { Box, CssBaseline, Divider, Grid, Typography } from '@mui/material'
 import { deepPurple, grey, indigo } from '@mui/material/colors'
+import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
@@ -8,10 +9,10 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
+import { useAuth } from '../../hooks/auth'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { useLoginMutation } from '../../redux/api/auth.api'
-import { useGetUserMutation } from '../../redux/api/user.api'
-import { setToken, setUser } from '../../redux/reducers/auth.reducer'
+import { setLogin, setUser } from '../../redux/reducers/auth.reducer'
 import { GENERATOR_INPUT_TYPE, LoginForm } from '../../types'
 
 const defaultValues = { username: '', password: '' }
@@ -20,31 +21,13 @@ export const Login = () => {
   const { t } = useTranslation()
   const methods = useForm<LoginForm>({ defaultValues })
   const { handleSubmit } = methods
-
+  const { isAuth, onLogin } = useAuth()
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
-  const token = useAppSelector(state => state.auth.token)
-  const [onLogin] = useLoginMutation()
-  const [onGetUser] = useGetUserMutation()
 
-  useEffect(() => {
-    if (token) {
-      onGetUser()
-        .unwrap()
-        .then(user => {
-          dispatch(setUser({ user }))
-          navigate('/empty')
-        })
-    }
-  }, [token])
-
-  const handleSignIn = async (data: LoginForm) => {
-    await onLogin(data)
-      .unwrap()
-      .then(({ token }) => {
-        dispatch(setToken({ token }))
-      })
+  const handleSignIn = (data: LoginForm) => {
+    onLogin(data).then(() => navigate('/'))
   }
 
   return (

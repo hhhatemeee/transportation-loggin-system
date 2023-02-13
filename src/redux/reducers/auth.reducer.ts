@@ -1,22 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 
 import { AuthState, UserType } from '../../types'
 
-const initialState: AuthState = { user: null, token: null }
+const initialState: AuthState = { user: null, isAuth: false }
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setToken: (state, { payload: { token } }: PayloadAction<{ token: string }>) => {
-      state.token = token
+    setLogin: (state, { payload: token }: PayloadAction<string>) => {
+      Cookies.set('jwt', token, { sameSite: 'strict', expires: 1 / 144 })
+      state.isAuth = true
     },
-    setUser: (state, { payload: { user } }: PayloadAction<{ user: UserType }>) => {
+    setUser: (state, { payload: user }: PayloadAction<UserType>) => {
+      state.isAuth = true
       state.user = user
     },
   },
 })
 
-export const { setToken, setUser } = authSlice.actions
+export const { setLogin, setUser } = authSlice.actions
 
 export default authSlice.reducer
