@@ -8,9 +8,11 @@ import { useLoginMutation } from '../../redux/api/auth.api'
 import { useNavigate } from 'react-router-dom'
 import { useGetUserQuery } from '../../redux/api/user.api'
 import { AppLoader } from '../../components/AppLoader'
+import { ROUTES } from '../../constants'
 
 type AuthProviderContextProps = {
   onLogin: (data: LoginForm) => Promise<string>
+  onLogout: () => void
   onCheckAuth: () => void
   loading: boolean
 } & AuthState
@@ -30,7 +32,9 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const navigate = useNavigate()
   const cookieToken = Cookies.get('jwt')
 
-  const { refetch, isError, isLoading, isFetching } = useGetUserQuery(undefined, { skip: !cookieToken })
+  const { refetch, isError, isLoading, isFetching } = useGetUserQuery(undefined, {
+    skip: !cookieToken,
+  })
 
   const loading = isLoading || isFetching
 
@@ -41,6 +45,11 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         dispatch(setLogin(token))
         return token
       })
+
+  const handleLogout = () => {
+    dispatch(setLogin(null))
+    navigate(ROUTES.LOGIN)
+  }
 
   const handleCheckAuth = () => {
     refetch()
@@ -54,7 +63,14 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthProviderContext.Provider
-      value={{ isAuth, user, loading, onLogin: handleLogin, onCheckAuth: handleCheckAuth }}
+      value={{
+        isAuth,
+        user,
+        loading,
+        onLogin: handleLogin,
+        onCheckAuth: handleCheckAuth,
+        onLogout: handleLogout,
+      }}
     >
       {children}
     </AuthProviderContext.Provider>
