@@ -7,9 +7,9 @@ export const commonAPI = createApi({
   reducerPath: 'commonApi',
   tagTypes,
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:28080/api',
+    baseUrl: '/api',
     credentials: 'same-origin',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: headers => {
       const token = Cookies.get('jwt')
 
       if (token) {

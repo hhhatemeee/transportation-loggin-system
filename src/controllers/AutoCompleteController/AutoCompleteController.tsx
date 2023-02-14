@@ -22,6 +22,7 @@ export const AutoCompleteController: FC<AutoCompleteControllerProps<any>> = ({
   label,
   ...props
 }) => {
+  console.log(props.loading)
   const { control } = useFormContext()
   return (
     <Controller

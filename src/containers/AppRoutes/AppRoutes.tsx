@@ -2,9 +2,9 @@ import { useRoutes } from 'react-router-dom'
 import { ROUTES } from '../../constants'
 
 import { DictionaryContracts } from '../../pages/DictionaryContracts'
-import { DictionaryCounterparties } from '../../pages/DictionaryCounterparties'
+import { DictionaryClients } from '../../pages/DictionaryClients'
 import { DictionaryServices } from '../../pages/DictionaryServices'
-import { DictionaryVehicles } from '../../pages/DictionaryVehicles'
+import { DictionaryCars } from '../../pages/DictionaryCars'
 import { EmptyPage } from '../../pages/EmptyPage'
 import { History } from '../../pages/History'
 import { Login } from '../../pages/Login'
@@ -75,7 +75,7 @@ export const AppRoutes = () => {
             },
             {
               path: ROUTES.DICTIONARY_COUNTERPARTIES,
-              element: <DictionaryCounterparties />,
+              element: <DictionaryClients />,
             },
             {
               path: ROUTES.DICTIONARY_SERVICES,
@@ -83,7 +83,7 @@ export const AppRoutes = () => {
             },
             {
               path: ROUTES.DICTIONARY_VEHICLES,
-              element: <DictionaryVehicles />,
+              element: <DictionaryCars />,
             },
           ],
         },

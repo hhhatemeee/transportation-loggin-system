@@ -24,8 +24,18 @@ const DictionaryForm = <T extends FieldValues>({
 
   const {
     handleSubmit,
+    reset,
     formState: { isDirty },
   } = methods
+
+  const handleAdd = (data: T) => {
+    try {
+      onAdd(data)
+      reset()
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <Grid container flexDirection={'column'} spacing={1}>
@@ -35,7 +45,7 @@ const DictionaryForm = <T extends FieldValues>({
         </FormProvider>
       </Grid>
       <Grid item alignSelf={'flex-end'}>
-        <Button variant='contained' onClick={handleSubmit(onAdd)} disabled={!isDirty}>
+        <Button variant='contained' onClick={handleSubmit(handleAdd)} disabled={!isDirty}>
           {t('buttons.addButton')}
         </Button>
       </Grid>

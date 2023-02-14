@@ -5,7 +5,7 @@ export type POSTLoginType = LoginForm
 
 export type ReturnLoginType = {
   success: boolean
-  token: string
+  refreshToken: string
 }
 
 export type AuthState = {

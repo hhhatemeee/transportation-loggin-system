@@ -27,7 +27,8 @@ export const AccountPopover: FC = () => {
         onClick={handlePopoverOpen}
         avatar={
           <Avatar variant='circular' sx={{ border: 1, borderColor: blue[600] }}>
-            {user?.firstname[0]}{user?.lastname[0]}
+            {user?.firstname[0]}
+            {user?.lastname[0]}
           </Avatar>
         }
         label={<Settings color='primary' sx={{ display: 'flex' }} />}
