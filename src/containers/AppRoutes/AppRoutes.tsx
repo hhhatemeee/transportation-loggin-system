@@ -18,7 +18,6 @@ import { ReportsStatistics } from '../../pages/ReportsStatistics'
 import { PrivateRoute } from '../PrivateRoute'
 
 export const AppRoutes = () => {
-
   const routes = useRoutes([
     {
       path: ROUTES.LOGIN,

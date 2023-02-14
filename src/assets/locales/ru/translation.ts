@@ -1,5 +1,9 @@
 export const localizationRu = {
   logo: 'L O G O',
+  accountMenu: {
+    logout: 'Выйти',
+    profile: 'Профиль',
+  },
   buttons: {
     addButton: 'Добавить',
   },

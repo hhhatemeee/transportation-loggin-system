@@ -1,18 +1,14 @@
 import { Box, CssBaseline, Divider, Grid, Typography } from '@mui/material'
 import { deepPurple, grey, indigo } from '@mui/material/colors'
-import Cookies from 'js-cookie'
-import { useEffect } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
+import { ROUTES } from '../../constants'
 import { useAuth } from '../../hooks/auth'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { useLoginMutation } from '../../redux/api/auth.api'
-import { setLogin, setUser } from '../../redux/reducers/auth.reducer'
 import { GENERATOR_INPUT_TYPE, LoginForm } from '../../types'
 
 const defaultValues = { username: '', password: '' }
@@ -24,7 +20,9 @@ export const Login = () => {
   const { isAuth, onLogin } = useAuth()
   const navigate = useNavigate()
 
-  const dispatch = useAppDispatch()
+  if (isAuth) {
+    return <Navigate to={ROUTES.EMPTY} />
+  }
 
   const handleSignIn = (data: LoginForm) => {
     onLogin(data).then(() => navigate('/'))
