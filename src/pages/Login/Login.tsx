@@ -1,9 +1,10 @@
 import { Box, CssBaseline, Divider, Grid, Typography } from '@mui/material'
-import { deepPurple, grey, indigo } from '@mui/material/colors'
+import { blue, grey, indigo } from '@mui/material/colors'
 import { FormProvider } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { AppLoader } from '../../components/AppLoader'
 
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
@@ -17,7 +18,7 @@ export const Login = () => {
   const { t } = useTranslation()
   const methods = useForm<LoginForm>({ defaultValues })
   const { handleSubmit } = methods
-  const { isAuth, onLogin } = useAuth()
+  const { isAuth, onLogin, loginLoading } = useAuth()
   const navigate = useNavigate()
 
   if (isAuth) {
@@ -26,6 +27,10 @@ export const Login = () => {
 
   const handleSignIn = (data: LoginForm) => {
     onLogin(data).then(() => navigate('/'))
+  }
+
+  if (loginLoading) {
+    return <AppLoader />
   }
 
   return (
@@ -55,7 +60,7 @@ export const Login = () => {
             <Grid>
               <Grid item container alignItems={'center'} flexDirection={'column'} mb={4}>
                 <Grid item>
-                  <Typography fontWeight={600} fontSize={24} color={deepPurple[600]}>
+                  <Typography fontWeight={600} fontSize={24} color={blue[600]}>
                     {t('loginPage.welcome')}
                   </Typography>
                 </Grid>
@@ -98,7 +103,7 @@ export const Login = () => {
                 <Button
                   onClick={handleSubmit(handleSignIn)}
                   variant='contained'
-                  sx={{ bgcolor: deepPurple[600], fontWeight: 600, py: 1 }}
+                  sx={{ fontWeight: 600, py: 1 }}
                   fullWidth
                 >
                   {t('loginPage.singInBtn')}

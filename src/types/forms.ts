@@ -35,28 +35,28 @@ export type DictionaryServicesForm = {
   description: string
 }
 
-export type DictionaryVehiclesForm = {
-  stateNumber: string
+export type DictionaryCarsForm = {
+  gosNum: string
   model: string
-  STS: string
-  counterpart: AutocompleteOption | null
+  sts: string
+  client: AutocompleteOption | null
 }
 
 export type DictionaryContractsForm = {
-  dateStart: string | null
-  dateEnd: string | null
-  vehicles: AutocompleteOption | null
-  counterpart: AutocompleteOption | null
+  startDate: string | null
+  endDate: string | null
+  car: AutocompleteOption | null
+  client: AutocompleteOption | null
 }
 
-export type DictionaryCounterpartiesForm = {
+export type DictionaryClientForm = {
   name: string
-  payment: string
   address: string
-  bank: string
   inn: string
-  bik: string
   kpp: string
+  rs: string
+  bank: string
+  bik: string
   ks: string
 }
 

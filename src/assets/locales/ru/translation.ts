@@ -118,7 +118,7 @@ export const localizationRu = {
         name: {
           label: 'Название',
         },
-        payment: {
+        rs: {
           label: 'Расчетный счет',
         },
         address: {
@@ -150,27 +150,27 @@ export const localizationRu = {
         dateEnd: {
           label: 'Дата конца договора',
         },
-        vehicles: {
+        car: {
           label: 'Транспортные средства',
         },
-        counterpart: {
+        client: {
           label: 'Контрагент',
         },
       },
     },
-    vehicles: {
+    cars: {
       title: 'Справочники. Транспортные средства',
       form: {
-        stateNumber: {
+        gosNum: {
           label: 'Гос. номер',
         },
         model: {
           label: 'Модель',
         },
-        STS: {
+        sts: {
           label: 'СТС',
         },
-        counterpart: {
+        client: {
           label: 'Контрагент',
         },
       },

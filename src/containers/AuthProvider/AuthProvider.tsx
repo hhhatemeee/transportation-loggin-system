@@ -15,6 +15,7 @@ type AuthProviderContextProps = {
   onLogout: () => void
   onCheckAuth: () => void
   loading: boolean
+  loginLoading: boolean
 } & AuthState
 
 export const AuthProviderContext = createContext<AuthProviderContextProps>(
@@ -28,7 +29,7 @@ type AuthProviderProps = {
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const { isAuth, user } = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
-  const [login] = useLoginMutation()
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation()
   const navigate = useNavigate()
   const cookieToken = Cookies.get('jwt')
 
@@ -41,9 +42,10 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const handleLogin = (data: LoginForm) =>
     login(data)
       .unwrap()
-      .then(({ token }) => {
-        dispatch(setLogin(token))
-        return token
+      .then(({ refreshToken }) => {
+        // TODO: временно стоит, убрать как на бэке всё решится
+        dispatch(setLogin(refreshToken))
+        return refreshToken
       })
 
   const handleLogout = () => {
@@ -67,6 +69,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         isAuth,
         user,
         loading,
+        loginLoading: isLoginLoading,
         onLogin: handleLogin,
         onCheckAuth: handleCheckAuth,
         onLogout: handleLogout,
