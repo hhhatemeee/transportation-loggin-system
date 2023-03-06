@@ -35,6 +35,12 @@ export const carsAPI = commonAPI.injectEndpoints({
         method: 'GET',
       }),
     }),
+    findCarByGosNum: build.mutation<GETCarType, string>({
+      query: gosNum => ({
+        url: `/car/findByGosNum/${gosNum}`,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 
@@ -44,4 +50,5 @@ export const {
   useGetCarByIdQuery,
   useUpdateCarMutation,
   useGetCarsQuery,
+  useFindCarByGosNumMutation,
 } = carsAPI

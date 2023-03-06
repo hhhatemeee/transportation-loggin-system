@@ -1,40 +1,79 @@
 import { ChevronLeft } from '@mui/icons-material'
 import { Grid, IconButton, Typography } from '@mui/material'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Location, useLocation, useNavigate, useParams } from 'react-router-dom'
 
+import { AppLoader } from '../../components/AppLoader'
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
 import { ROUTES } from '../../constants'
-import { GENERATOR_INPUT_TYPE, RegistrationOrderForm } from '../../types'
+import { useGetClientByIdQuery, useGetServicesQuery } from '../../redux/api'
+import { useAddJournalMutation } from '../../redux/api/journal.api'
+import { GENERATOR_INPUT_TYPE, GETCarType, RegistrationOrderForm } from '../../types'
 
-const defaultValues = {
+const defaultValues: RegistrationOrderForm = {
   stateNumber: '',
   carBrand: '',
   counterpart: '',
-  dateStart: null,
-  dateEnd: null,
-  listNumber: '',
-  fio: '',
+  incomingDate: null,
+  outPlanDate: null,
+  waybill: '',
+  nameDriver: '',
   services: null,
   comment: '',
 }
 
+type OrderLocationType = {
+  state: GETCarType
+} & Omit<Location, 'state'>
+
 export const RegistrationOrder: FC = () => {
   const { code } = useParams<{ code: string }>()
   const navigate = useNavigate()
+  const {
+    state: { model, clientId, id: carId },
+  } = useLocation() as OrderLocationType
   const { t } = useTranslation()
   const methods = useForm<RegistrationOrderForm>({ defaultValues })
   const {
     handleSubmit,
+    reset,
     formState: { isDirty },
   } = methods
-
   const handleBack = () => navigate(ROUTES.REGISTRATION_ARRIVAL)
+  const {
+    data: client,
+    isLoading: isLoadingClient,
+    isFetching: isFetchingClient,
+  } = useGetClientByIdQuery(clientId, {
+    skip: !clientId,
+  })
+  const loadingClient = isLoadingClient || isFetchingClient
+  const { data: services, isLoading: isLoadingService } = useGetServicesQuery()
+  const [registrateOrder] = useAddJournalMutation()
 
-  const handleRegistration = (data: RegistrationOrderForm) => console.log(data)
+  const servicesOptions = useMemo(
+    () => services?.map(({ id, name }) => ({ id, label: name })) || [],
+    [services]
+  )
+
+  const handleRegistration = ({
+    incomingDate,
+    outPlanDate,
+    nameDriver,
+    waybill,
+  }: RegistrationOrderForm) => {
+    if (incomingDate && outPlanDate) {
+      // TODO: Исправить ДТО на бэке, не хватает двух полей
+      registrateOrder({ carId, incomingDate, outPlanDate, nameDriver, waybill }).then(() => reset())
+    }
+  }
+
+  if (loadingClient) {
+    return <AppLoader />
+  }
 
   return (
     <Grid container flexDirection={'column'} alignItems={'center'}>
@@ -66,12 +105,16 @@ export const RegistrationOrder: FC = () => {
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'carBrand',
-                    labelOver: t('registrationCarPage.order.form.carBrand'),
+                    labelOver: t('registrationPage.order.form.carBrand'),
+                    disabled: true,
+                    value: model,
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'counterpart',
-                    labelOver: t('registrationCarPage.order.form.counterpart'),
+                    labelOver: t('registrationPage.order.form.counterpart'),
+                    disabled: true,
+                    value: client?.name,
                   },
                 ],
                 name: 'row1',
@@ -80,13 +123,13 @@ export const RegistrationOrder: FC = () => {
                 inputs: [
                   {
                     inputType: GENERATOR_INPUT_TYPE.DATE_TIME_PICKER,
-                    name: 'dateStart',
-                    labelOver: t('registrationCarPage.order.form.dateStart'),
+                    name: 'incomingDate',
+                    labelOver: t('registrationPage.order.form.incomingDate'),
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.DATE_TIME_PICKER,
-                    name: 'dateEnd',
-                    labelOver: t('registrationCarPage.order.form.dateEnd'),
+                    name: 'outPlanDate',
+                    labelOver: t('registrationPage.order.form.outPlanDate'),
                   },
                 ],
                 name: 'row2',
@@ -95,13 +138,13 @@ export const RegistrationOrder: FC = () => {
                 inputs: [
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
-                    name: 'listNumber',
-                    labelOver: t('registrationCarPage.order.form.listNumber'),
+                    name: 'waybill',
+                    labelOver: t('registrationPage.order.form.waybill'),
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
-                    name: 'fio',
-                    labelOver: t('registrationCarPage.order.form.fio'),
+                    name: 'nameDriver',
+                    labelOver: t('registrationPage.order.form.nameDriver'),
                   },
                 ],
                 name: 'row3',
@@ -109,8 +152,9 @@ export const RegistrationOrder: FC = () => {
               {
                 inputType: GENERATOR_INPUT_TYPE.AUTOCOMPLETE,
                 name: 'services',
-                labelOver: t('registrationCarPage.order.form.services'),
-                autocompleteOptions: [],
+                labelOver: t('registrationPage.order.form.services'),
+                autocompleteOptions: servicesOptions,
+                loading: isLoadingService,
               },
               {
                 inputType: GENERATOR_INPUT_TYPE.TEXTAREA,

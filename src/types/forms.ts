@@ -72,10 +72,10 @@ export type RegistrationOrderForm = {
   stateNumber: string
   carBrand: string
   counterpart: string
-  dateStart: string | null
-  dateEnd: string | null
-  listNumber: string
-  fio: string
+  incomingDate: string | null
+  outPlanDate: string | null
+  waybill: string
+  nameDriver: string
   services: AutocompleteOption | null
   comment: string
 }
