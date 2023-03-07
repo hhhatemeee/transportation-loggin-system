@@ -10,7 +10,7 @@ import { FormRegistration } from '../Registration/components/FormRegistration'
 export const RegistrationArrival: FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const [findCarByGosNum] = useFindCarByGosNumMutation()
+  const [findCarByGosNum] = useFindCarByGosNumMutation({ fixedCacheKey: 'shared-foundCar' })
 
   const handleArrive = (data: STSForm) => {
     findCarByGosNum(data.code)

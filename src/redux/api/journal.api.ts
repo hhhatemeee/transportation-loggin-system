@@ -23,8 +23,8 @@ export const journalAPI = commonAPI.injectEndpoints({
       }),
     }),
     updateJournal: build.mutation<GETJournalType, PUTJournalType>({
-      query: body => ({
-        url: `/journal/${body.id}`,
+      query: ({ id, ...body }) => ({
+        url: `/journal/${id}`,
         method: 'PUT',
         body,
       }),

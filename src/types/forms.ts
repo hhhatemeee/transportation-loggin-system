@@ -69,7 +69,7 @@ export type DictionaryClientForm = {
 }
 
 export type RegistrationOrderForm = {
-  stateNumber: string
+  gosNum: string
   carBrand: string
   counterpart: string
   incomingDate: string | null

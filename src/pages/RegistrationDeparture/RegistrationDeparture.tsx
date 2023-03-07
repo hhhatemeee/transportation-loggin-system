@@ -5,6 +5,9 @@ import { FormRegistration } from '../RegistrationCar/components/FormRegistration
 
 export const RegistrationDeparture: FC = () => {
   const { t } = useTranslation()
+
+  // const handleDeparture
+
   return (
     <FormRegistration
       onSubmitNubmerState={data => console.log(data)}

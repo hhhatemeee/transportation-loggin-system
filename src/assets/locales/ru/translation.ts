@@ -34,7 +34,7 @@ export const localizationRu = {
     order: {
       title: 'Заполнение заказа',
       form: {
-        stateNumber: 'Гос. номер',
+        gosNum: 'Гос. номер',
         carBrand: 'Марка автомобиля',
         counterpart: 'Контрагент',
         incomingDate: 'Дата заезда',
