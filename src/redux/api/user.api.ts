@@ -1,4 +1,6 @@
 import Cookies from 'js-cookie'
+
+import { COOKIES_DATA } from '../../constants'
 import { ReturnGetUserType } from '../../types'
 import { setUser } from '../reducers/auth.reducer'
 import { commonAPI } from './common.api'
@@ -15,7 +17,8 @@ export const userAPI = commonAPI.injectEndpoints({
           const { data: user } = await queryFulfilled
           dispatch(setUser(user))
         } catch (err) {
-          Cookies.remove('jwt')
+          Cookies.remove(COOKIES_DATA.ACCESS_TOKEN)
+          Cookies.remove(COOKIES_DATA.REFRESH_TOKEN)
         }
       },
     }),

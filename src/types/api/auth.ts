@@ -3,9 +3,16 @@ import { UserType } from './user'
 
 export type POSTLoginType = LoginForm
 
+const enum AUTH_RETURN {
+  PREFIX = 'Bearer ',
+}
+
 export type ReturnLoginType = {
-  success: boolean
   refreshToken: string
+  prefix: AUTH_RETURN.PREFIX
+  accessToken: string
+  accessExpiryDate: string
+  expiryRefreshDate: string
 }
 
 export type AuthState = {
@@ -17,3 +24,5 @@ export type SetUserPayloadAction = {
   user: UserType
   token: string
 }
+
+export type ReturnRefreshTokenType = ReturnLoginType

@@ -2,16 +2,16 @@ import { createContext, FC, ReactNode } from 'react'
 import Cookies from 'js-cookie'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 
-import { AuthState, LoginForm } from '../../types'
+import { AuthState, LoginForm, ReturnLoginType } from '../../types'
 import { setLogin, setUser } from '../../redux/reducers/auth.reducer'
 import { useLoginMutation } from '../../redux/api/auth.api'
 import { useNavigate } from 'react-router-dom'
 import { useGetUserQuery } from '../../redux/api/user.api'
 import { AppLoader } from '../../components/AppLoader'
-import { ROUTES } from '../../constants'
+import { COOKIES_DATA, ROUTES } from '../../constants'
 
 type AuthProviderContextProps = {
-  onLogin: (data: LoginForm) => Promise<string>
+  onLogin: (data: LoginForm) => Promise<ReturnLoginType>
   onLogout: () => void
   onCheckAuth: () => void
   loading: boolean
@@ -31,7 +31,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch()
   const [login, { isLoading: isLoginLoading }] = useLoginMutation()
   const navigate = useNavigate()
-  const cookieToken = Cookies.get('jwt')
+  const cookieToken = Cookies.get(COOKIES_DATA.ACCESS_TOKEN)
 
   const { refetch, isError, isLoading, isFetching } = useGetUserQuery(undefined, {
     skip: !cookieToken,
@@ -42,10 +42,9 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const handleLogin = (data: LoginForm) =>
     login(data)
       .unwrap()
-      .then(({ refreshToken }) => {
-        // TODO: временно стоит, убрать как на бэке всё решится
-        dispatch(setLogin(refreshToken))
-        return refreshToken
+      .then(res => {
+        dispatch(setLogin(res))
+        return res
       })
 
   const handleLogout = () => {

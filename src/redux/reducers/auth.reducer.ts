@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
 
-import { AuthState, UserType } from '../../types'
+import { COOKIES_DATA } from '../../constants'
+import { AuthState, ReturnLoginType, UserType } from '../../types'
 
 const initialState: AuthState = { user: null, isAuth: false }
 
@@ -9,13 +10,25 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLogin: (state, { payload: token }: PayloadAction<string | null>) => {
-      if (token) {
-        Cookies.set('jwt', token, { sameSite: 'strict', expires: 1 / 144 })
+    setLogin: (state, { payload }: PayloadAction<ReturnLoginType | null>) => {
+      if (payload) {
+        const { prefix, expiryRefreshDate, accessExpiryDate } = payload
+        const accessToken = prefix + payload.accessToken
+        const refreshToken = prefix + payload.refreshToken
+
+        Cookies.set(COOKIES_DATA.ACCESS_TOKEN, accessToken, {
+          sameSite: 'strict',
+          expires: new Date(accessExpiryDate),
+        })
+        Cookies.set(COOKIES_DATA.REFRESH_TOKEN, refreshToken, {
+          sameSite: 'strict',
+          expires: new Date(expiryRefreshDate),
+        })
         state.isAuth = true
         return
       }
-      Cookies.remove('jwt')
+      Cookies.remove(COOKIES_DATA.ACCESS_TOKEN)
+      Cookies.remove(COOKIES_DATA.REFRESH_TOKEN)
       state.isAuth = false
     },
     setUser: (state, { payload: user }: PayloadAction<UserType>) => {

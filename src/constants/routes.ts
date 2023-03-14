@@ -1,6 +1,7 @@
 export const ROUTES = {
   EMPTY: '/empty',
   LOGIN: '/login',
+  REFRESH_TOKEN: '/auth/refresh',
   REGISTRATION: '/registration',
   REGISTRATION_ARRIVAL: '/registration/arrival',
   REGISTRATION_ORDER: '/registration/arrival/:code',
