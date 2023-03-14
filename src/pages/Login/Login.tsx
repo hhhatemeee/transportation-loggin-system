@@ -1,25 +1,36 @@
 import { Box, CssBaseline, Divider, Grid, Typography } from '@mui/material'
-import { deepPurple, grey, indigo } from '@mui/material/colors'
+import { blue, grey, indigo } from '@mui/material/colors'
 import { FormProvider } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { AppLoader } from '../../components/AppLoader'
 
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
+import { ROUTES } from '../../constants'
+import { useAuth } from '../../hooks/auth'
 import { GENERATOR_INPUT_TYPE, LoginForm } from '../../types'
 
-const defaultValues = { login: '', password: '' }
+const defaultValues = { username: '', password: '' }
 
 export const Login = () => {
-  const methods = useForm<LoginForm>({ defaultValues })
-  const navigate = useNavigate()
-  const { handleSubmit } = methods
   const { t } = useTranslation()
+  const methods = useForm<LoginForm>({ defaultValues })
+  const { handleSubmit } = methods
+  const { isAuth, onLogin, loginLoading } = useAuth()
+  const navigate = useNavigate()
+
+  if (isAuth) {
+    return <Navigate to={ROUTES.EMPTY} />
+  }
 
   const handleSignIn = (data: LoginForm) => {
-    console.log(data)
-    navigate('/empty')
+    onLogin(data).then(() => navigate('/'))
+  }
+
+  if (loginLoading) {
+    return <AppLoader />
   }
 
   return (
@@ -49,7 +60,7 @@ export const Login = () => {
             <Grid>
               <Grid item container alignItems={'center'} flexDirection={'column'} mb={4}>
                 <Grid item>
-                  <Typography fontWeight={600} fontSize={24} color={deepPurple[600]}>
+                  <Typography fontWeight={600} fontSize={24} color={blue[600]}>
                     {t('loginPage.welcome')}
                   </Typography>
                 </Grid>
@@ -70,7 +81,7 @@ export const Login = () => {
                 <FormGenerator
                   inputs={[
                     {
-                      name: 'login',
+                      name: 'username',
                       inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                       labelOver: t('loginPage.form.username.label'),
                       type: 'email',
@@ -92,7 +103,7 @@ export const Login = () => {
                 <Button
                   onClick={handleSubmit(handleSignIn)}
                   variant='contained'
-                  sx={{ bgcolor: deepPurple[600], fontWeight: 600, py: 1 }}
+                  sx={{ fontWeight: 600, py: 1 }}
                   fullWidth
                 >
                   {t('loginPage.singInBtn')}

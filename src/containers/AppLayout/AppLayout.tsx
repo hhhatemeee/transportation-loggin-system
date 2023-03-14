@@ -1,15 +1,20 @@
 import { Container, CssBaseline } from '@mui/material'
-import { FC, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { FC, ReactNode, useState } from 'react'
+import { Navigate, Outlet } from 'react-router-dom'
 
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
+import { ROUTES } from '../../constants'
 import { useSidebar } from '../../hooks'
+import { useAuth } from '../../hooks/auth'
 
-export const AppLayout: FC = () => {
+type AppLayoutProps = {
+  children: ReactNode
+}
+
+export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true)
   const handleOpen = () => setIsOpen(!isOpen)
-
   const options = useSidebar()
 
   return (
@@ -18,7 +23,7 @@ export const AppLayout: FC = () => {
       <Header onOpen={handleOpen} open={isOpen} />
       <Sidebar options={options} open={isOpen} onClose={handleOpen}>
         <Container component={'main'} maxWidth={false}>
-          <Outlet />
+          {children}
         </Container>
       </Sidebar>
     </>

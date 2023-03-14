@@ -1,0 +1,60 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import Cookies from 'js-cookie'
+
+import { COOKIES_DATA, ROUTES, URLS } from '../../constants'
+import { ReturnRefreshTokenType } from '../../types'
+import { setLogin } from '../reducers/auth.reducer'
+
+export const tagTypes = []
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: URLS.BASE_URL,
+  credentials: 'same-origin',
+  prepareHeaders: headers => {
+    const token = Cookies.get(COOKIES_DATA.ACCESS_TOKEN)
+
+    if (token) {
+      headers.set('authorization', token)
+    }
+    headers.set('Access-Control-Allow-Origin', '*')
+    headers.set('Access-Control-Allow-Headers', '*')
+    headers.set('Content-Type', 'application/json')
+    headers.set('Accept', 'application/json')
+    return headers
+  },
+})
+
+const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions)
+
+  if (result?.error?.status === 401) {
+    const refreshToken = Cookies.get(COOKIES_DATA.REFRESH_TOKEN)
+    const refreshResult = await baseQuery(
+      {
+        url: ROUTES.REFRESH_TOKEN,
+        method: 'POST',
+        headers: { authorization: refreshToken },
+      },
+      api,
+      extraOptions
+    )
+
+    if (refreshResult.data) {
+      // Didn't find a solution how to type data
+      api.dispatch(setLogin(refreshResult.data as ReturnRefreshTokenType))
+
+      result = await baseQuery(args, api, extraOptions)
+    } else {
+      api.dispatch(setLogin(null))
+    }
+  }
+
+  return result
+}
+
+export const commonAPI = createApi({
+  reducerPath: 'commonApi',
+  tagTypes,
+  baseQuery: baseQueryWithReauth,
+  endpoints: () => ({}),
+})
