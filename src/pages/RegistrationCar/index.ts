@@ -1,0 +1,1 @@
+export { RegistrationCar } from './RegistrationCar'

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { FormRegistration } from '../Registration/components/FormRegistration'
+import { FormRegistration } from '../RegistrationCar/components/FormRegistration'
 
 export const RegistrationDeparture: FC = () => {
   const { t } = useTranslation()

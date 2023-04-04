@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 
-export const Registration: FC = () => {
+export const RegistrationCar: FC = () => {
   return <Outlet />
 }
