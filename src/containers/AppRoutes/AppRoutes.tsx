@@ -16,12 +16,17 @@ import { Reports } from '../../pages/Reports'
 import { ReportsCounterparties } from '../../pages/ReportsCounterparties'
 import { ReportsStatistics } from '../../pages/ReportsStatistics'
 import { PrivateRoute } from '../PrivateRoute'
+import { Registration } from '../../pages/Registration'
 
 export const AppRoutes = () => {
   const routes = useRoutes([
     {
       path: ROUTES.LOGIN,
       element: <Login />,
+    },
+    {
+      path: ROUTES.REGISTRATION,
+      element: <Registration />,
     },
     {
       element: <PrivateRoute />,
@@ -31,7 +36,7 @@ export const AppRoutes = () => {
           element: <EmptyPage />,
         },
         {
-          path: ROUTES.REGISTRATION,
+          path: ROUTES.REGISTRATION_CAR,
           element: <RegistrationCar />,
           children: [
             {

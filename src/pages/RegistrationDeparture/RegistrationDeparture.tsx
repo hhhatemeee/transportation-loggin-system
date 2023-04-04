@@ -9,7 +9,7 @@ export const RegistrationDeparture: FC = () => {
     <FormRegistration
       onSubmitNubmerState={data => console.log(data)}
       onSubmitSTS={data => console.log(data)}
-      submitBtnText={t('registrationPage.departure.submitButton')}
+      submitBtnText={t('registrationCarPage.departure.submitButton')}
     />
   )
 }

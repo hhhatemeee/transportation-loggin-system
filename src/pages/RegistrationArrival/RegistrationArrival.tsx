@@ -13,7 +13,7 @@ export const RegistrationArrival: FC = () => {
     <FormRegistration
       onSubmitNubmerState={data => navigate(`${ROUTES.REGISTRATION_ARRIVAL}/${data.code}`)}
       onSubmitSTS={data => console.log(data)}
-      submitBtnText={t('registrationPage.arrival.submitButton')}
+      submitBtnText={t('registrationCarPage.arrival.submitButton')}
     />
   )
 }

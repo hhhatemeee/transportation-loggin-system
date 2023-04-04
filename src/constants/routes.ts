@@ -1,8 +1,9 @@
 export const ROUTES = {
   EMPTY: '/empty',
   LOGIN: '/login',
-  REFRESH_TOKEN: '/auth/refresh',
   REGISTRATION: '/registration',
+  REFRESH_TOKEN: '/auth/refresh',
+  REGISTRATION_CAR: '/registration',
   REGISTRATION_ARRIVAL: '/registration/arrival',
   REGISTRATION_ORDER: '/registration/arrival/:code',
   REGISTRATION_DEPARTURE: '/registration/departure',

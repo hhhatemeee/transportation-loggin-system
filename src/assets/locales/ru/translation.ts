@@ -7,7 +7,7 @@ export const localizationRu = {
   buttons: {
     addButton: 'Добавить',
   },
-  registrationPage: {
+  registrationCarPage: {
     title: 'Регистрация',
     form: {
       title: 'Поиск ТС',
@@ -40,6 +40,27 @@ export const localizationRu = {
         comment: 'Комментарий',
       },
       submitButton: 'Зарегистрировать',
+    },
+  },
+  registrationPage: {
+    login: 'Авторизоваться',
+    subTitle: 'Регистрация',
+    form: {
+      firstname: {
+        label: 'Имя',
+      },
+      lastname: {
+        label: 'Фамилия',
+      },
+      username: {
+        label: 'Имя пользователя',
+      },
+      password: {
+        label: 'Пароль',
+      },
+      confirmPassword: {
+        label: 'Подтвердите пароль',
+      },
     },
   },
   loginPage: {

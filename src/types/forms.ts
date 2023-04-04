@@ -9,6 +9,14 @@ export type LoginForm = {
   password: string
 }
 
+export type RegistrationForm = {
+  firstname: string
+  lastname: string
+  username: string
+  password: string
+  confirmPassword: string
+}
+
 export type StateNumberForm = STSForm
 
 export type HistoryForm = {

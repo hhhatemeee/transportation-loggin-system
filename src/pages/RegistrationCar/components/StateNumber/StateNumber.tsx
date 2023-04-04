@@ -24,10 +24,10 @@ export const StateNumber: FC<StateNumberProps> = ({ onSubmit, submitBtnText }) =
           {
             name: 'code',
             inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
-            labelOver: t('registrationPage.form.stateNumber.label'),
+            labelOver: t('registrationCarPage.form.stateNumber.label'),
             size: 'medium',
             rules: {
-              required: t('registrationPage.form.stateNumber.emptyError'),
+              required: t('registrationCarPage.form.stateNumber.emptyError'),
             },
           },
         ]}
