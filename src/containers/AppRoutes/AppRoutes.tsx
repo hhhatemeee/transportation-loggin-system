@@ -8,7 +8,7 @@ import { DictionaryCars } from '../../pages/DictionaryCars'
 import { EmptyPage } from '../../pages/EmptyPage'
 import { History } from '../../pages/History'
 import { Login } from '../../pages/Login'
-import { Registration } from '../../pages/Registration'
+import { RegistrationCar } from '../../pages/RegistrationCar'
 import { RegistrationArrival } from '../../pages/RegistrationArrival'
 import { RegistrationDeparture } from '../../pages/RegistrationDeparture'
 import { RegistrationOrder } from '../../pages/RegistrationOrder'
@@ -16,12 +16,17 @@ import { Reports } from '../../pages/Reports'
 import { ReportsCounterparties } from '../../pages/ReportsCounterparties'
 import { ReportsStatistics } from '../../pages/ReportsStatistics'
 import { PrivateRoute } from '../PrivateRoute'
+import { Registration } from '../../pages/Registration'
 
 export const AppRoutes = () => {
   const routes = useRoutes([
     {
       path: ROUTES.LOGIN,
       element: <Login />,
+    },
+    {
+      path: ROUTES.REGISTRATION,
+      element: <Registration />,
     },
     {
       element: <PrivateRoute />,
@@ -31,8 +36,8 @@ export const AppRoutes = () => {
           element: <EmptyPage />,
         },
         {
-          path: ROUTES.REGISTRATION,
-          element: <Registration />,
+          path: ROUTES.REGISTRATION_CAR,
+          element: <RegistrationCar />,
           children: [
             {
               path: ROUTES.REGISTRATION_ARRIVAL,

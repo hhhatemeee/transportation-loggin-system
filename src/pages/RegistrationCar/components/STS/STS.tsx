@@ -24,10 +24,10 @@ export const STS: FC<STSProps> = ({ onSubmit, submitBtnText }) => {
           {
             name: 'code',
             inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
-            labelOver: t('registrationPage.form.STS.label'),
+            labelOver: t('registrationCarPage.form.STS.label'),
             size: 'medium',
             rules: {
-              required: t('registrationPage.form.STS.emptyError'),
+              required: t('registrationCarPage.form.STS.emptyError'),
             },
           },
         ]}

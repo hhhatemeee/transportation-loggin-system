@@ -1,4 +1,9 @@
-import { POSTLoginType, ReturnLoginType } from '../../types'
+import {
+  POSTLoginType,
+  POSTRegistrationType,
+  ReturnLoginType,
+  ReturnRegistrationType,
+} from '../../types'
 import { commonAPI } from './common.api'
 
 export const authAPI = commonAPI.injectEndpoints({
@@ -10,7 +15,14 @@ export const authAPI = commonAPI.injectEndpoints({
         body,
       }),
     }),
+    registration: build.mutation<ReturnRegistrationType, POSTRegistrationType>({
+      query: body => ({
+        url: '/auth/register',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 })
 
-export const { useLoginMutation } = authAPI
+export const { useLoginMutation, useRegistrationMutation } = authAPI

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { FormRegistration } from '../Registration/components/FormRegistration'
+import { FormRegistration } from '../RegistrationCar/components/FormRegistration'
 
 export const RegistrationDeparture: FC = () => {
   const { t } = useTranslation()
@@ -9,7 +9,7 @@ export const RegistrationDeparture: FC = () => {
     <FormRegistration
       onSubmitNubmerState={data => console.log(data)}
       onSubmitSTS={data => console.log(data)}
-      submitBtnText={t('registrationPage.departure.submitButton')}
+      submitBtnText={t('registrationCarPage.departure.submitButton')}
     />
   )
 }

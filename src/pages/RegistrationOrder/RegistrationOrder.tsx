@@ -46,7 +46,7 @@ export const RegistrationOrder: FC = () => {
         </Grid>
         <Grid justifyItems={'center'}>
           <Typography variant='h5' fontWeight={'600'}>
-            {t('registrationPage.order.title')}
+            {t('registrationCarPage.order.title')}
           </Typography>
         </Grid>
       </Grid>
@@ -59,19 +59,19 @@ export const RegistrationOrder: FC = () => {
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'stateNumber',
-                    labelOver: t('registrationPage.order.form.stateNumber'),
+                    labelOver: t('registrationCarPage.order.form.stateNumber'),
                     value: code,
                     disabled: true,
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'carBrand',
-                    labelOver: t('registrationPage.order.form.carBrand'),
+                    labelOver: t('registrationCarPage.order.form.carBrand'),
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'counterpart',
-                    labelOver: t('registrationPage.order.form.counterpart'),
+                    labelOver: t('registrationCarPage.order.form.counterpart'),
                   },
                 ],
                 name: 'row1',
@@ -81,12 +81,12 @@ export const RegistrationOrder: FC = () => {
                   {
                     inputType: GENERATOR_INPUT_TYPE.DATE_TIME_PICKER,
                     name: 'dateStart',
-                    labelOver: t('registrationPage.order.form.dateStart'),
+                    labelOver: t('registrationCarPage.order.form.dateStart'),
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.DATE_TIME_PICKER,
                     name: 'dateEnd',
-                    labelOver: t('registrationPage.order.form.dateEnd'),
+                    labelOver: t('registrationCarPage.order.form.dateEnd'),
                   },
                 ],
                 name: 'row2',
@@ -96,12 +96,12 @@ export const RegistrationOrder: FC = () => {
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'listNumber',
-                    labelOver: t('registrationPage.order.form.listNumber'),
+                    labelOver: t('registrationCarPage.order.form.listNumber'),
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'fio',
-                    labelOver: t('registrationPage.order.form.fio'),
+                    labelOver: t('registrationCarPage.order.form.fio'),
                   },
                 ],
                 name: 'row3',
@@ -109,13 +109,13 @@ export const RegistrationOrder: FC = () => {
               {
                 inputType: GENERATOR_INPUT_TYPE.AUTOCOMPLETE,
                 name: 'services',
-                labelOver: t('registrationPage.order.form.services'),
+                labelOver: t('registrationCarPage.order.form.services'),
                 autocompleteOptions: [],
               },
               {
                 inputType: GENERATOR_INPUT_TYPE.TEXTAREA,
                 name: 'comment',
-                labelOver: t('registrationPage.order.form.comment'),
+                labelOver: t('registrationCarPage.order.form.comment'),
               },
             ]}
           />
@@ -123,7 +123,7 @@ export const RegistrationOrder: FC = () => {
       </Grid>
       <Grid item alignSelf={'flex-end'}>
         <Button variant='contained' onClick={handleSubmit(handleRegistration)} disabled={!isDirty}>
-          {t('registrationPage.order.submitButton')}
+          {t('registrationCarPage.order.submitButton')}
         </Button>
       </Grid>
     </Grid>

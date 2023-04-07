@@ -28,21 +28,21 @@ export const FormRegistration: FC<FormRegistrationProps> = ({
   const { t } = useTranslation()
   return (
     <Grid container flexDirection={'column'}>
-      <PageTitle title={t('registrationPage.title')} />
+      <PageTitle title={t('registrationCarPage.title')} />
       <Grid item>
         <Card variant='outlined'>
           <CardContent>
             <Typography textAlign={'center'} variant='subtitle1'>
-              {t('registrationPage.form.title')}
+              {t('registrationCarPage.form.title')}
             </Typography>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }} mb={2}>
               <Tabs value={currentTab} onChange={handleChangeTab}>
                 <Tab
-                  label={t('registrationPage.form.stateNumber.label')}
+                  label={t('registrationCarPage.form.stateNumber.label')}
                   sx={{ maxWidth: '100%', flex: 1 }}
                 />
                 <Tab
-                  label={t('registrationPage.form.STS.label')}
+                  label={t('registrationCarPage.form.STS.label')}
                   sx={{ maxWidth: '100%', flex: 1 }}
                 />
               </Tabs>
