@@ -1,3 +1,5 @@
+import { AlertColor } from '@mui/material'
+
 export type ItemType = {
   id: number
   value: string
@@ -7,3 +9,5 @@ export type ItemType = {
   isSelected?: boolean
   isExpanded?: boolean
 }
+
+export type SnackType = AlertColor

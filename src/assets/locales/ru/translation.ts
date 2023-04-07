@@ -1,5 +1,10 @@
 export const localizationRu = {
   logo: 'L O G O',
+  notifications: {
+    success: 'Успешно',
+    error: 'Что-то пошло не так',
+    sessionExpired: 'Сессия истекла',
+  },
   accountMenu: {
     logout: 'Выйти',
     profile: 'Профиль',

@@ -1,9 +1,16 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 
 import { COOKIES_DATA, ROUTES, URLS } from '../../constants'
-import { ReturnRefreshTokenType } from '../../types'
+import { ExtraOptions, ReturnRefreshTokenType } from '../../types'
 import { setLogin } from '../reducers/auth.reducer'
+import { showMessage } from '../reducers/snackbar.reducer'
 
 export const tagTypes = []
 
@@ -52,9 +59,35 @@ const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) =>
   return result
 }
 
+const baseQueryWithNotification: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError,
+  ExtraOptions
+> = async (args, api, extraOptions) => {
+  const result = await baseQueryWithReauth(args, api, extraOptions)
+  const requestArgs = args as FetchArgs
+  const isValidRequest = requestArgs?.body || requestArgs?.method === 'DELETE' || result.error
+  // TODO: Согласовать ДТО ошибки с бэком
+  const resultErrorData = result.error ? JSON.stringify(result.error.data) : undefined
+  const showNotification = extraOptions?.showNotification ?? true
+
+  if (isValidRequest && showNotification) {
+    api.dispatch(
+      showMessage({
+        type: !result.error ? 'success' : 'error',
+        message: resultErrorData,
+        statusCode: result.meta?.response?.status || 404,
+      })
+    )
+  }
+
+  return result
+}
+
 export const commonAPI = createApi({
   reducerPath: 'commonApi',
   tagTypes,
-  baseQuery: baseQueryWithReauth,
+  baseQuery: baseQueryWithNotification,
   endpoints: () => ({}),
 })

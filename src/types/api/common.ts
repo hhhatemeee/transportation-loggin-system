@@ -16,3 +16,7 @@ export type MutationType<Payload, Return> = MutationTrigger<
     'commonApi'
   >
 >
+
+export type ExtraOptions = {
+  showNotification?: boolean
+}
