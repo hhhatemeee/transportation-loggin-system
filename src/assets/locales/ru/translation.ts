@@ -38,7 +38,7 @@ export const localizationRu = {
         carBrand: 'Марка автомобиля',
         counterpart: 'Контрагент',
         incomingDate: 'Дата заезда',
-        outPlanDate: 'Дата выезда',
+        outDate: 'Дата выезда',
         waybill: 'Номер путевого листа',
         nameDriver: 'ФИО водителя',
         services: 'Услуги',

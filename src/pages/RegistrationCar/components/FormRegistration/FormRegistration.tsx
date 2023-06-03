@@ -1,24 +1,16 @@
 import { Box, Card, CardContent, Grid, Tab, Tabs, Typography } from '@mui/material'
-import { FC, SyntheticEvent, useState } from 'react'
+import { FC, ReactNode, SyntheticEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { PageTitle } from '../../../../components/PageTitle'
 import { TabPanel } from '../../../../components/Tabs'
-import { StateNumberForm, STSForm } from '../../../../types'
-import { StateNumber } from '../StateNumber'
-import { STS } from '../STS'
 
 type FormRegistrationProps = {
-  onSubmitNubmerState: (data: StateNumberForm) => void
-  onSubmitSTS: (data: STSForm) => void
-  submitBtnText: string
+  stateNumberTab: ReactNode
+  STSTab: ReactNode
 }
 
-export const FormRegistration: FC<FormRegistrationProps> = ({
-  onSubmitSTS,
-  onSubmitNubmerState,
-  submitBtnText,
-}) => {
+export const FormRegistration: FC<FormRegistrationProps> = ({ STSTab, stateNumberTab }) => {
   const [currentTab, setCurrentTab] = useState(0)
 
   const handleChangeTab = (_e: SyntheticEvent, value: number) => {
@@ -48,10 +40,10 @@ export const FormRegistration: FC<FormRegistrationProps> = ({
               </Tabs>
             </Box>
             <TabPanel index={0} value={currentTab} contentSx={{ pb: 0 }}>
-              <StateNumber onSubmit={onSubmitNubmerState} submitBtnText={submitBtnText} />
+              {stateNumberTab}
             </TabPanel>
             <TabPanel index={1} value={currentTab} contentSx={{ pb: 0 }}>
-              <STS onSubmit={onSubmitSTS} submitBtnText={submitBtnText} />
+              {STSTab}
             </TabPanel>
           </CardContent>
         </Card>

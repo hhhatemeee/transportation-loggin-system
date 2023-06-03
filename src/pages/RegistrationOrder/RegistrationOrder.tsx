@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { AppLoader } from '../../components/AppLoader'
 import { Button } from '../../components/Button'
 import { FormGenerator } from '../../components/FormGenerator'
-import { ROUTES } from '../../constants'
 import { usePrompt } from '../../hooks'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 import { useRegistrationOrder } from './hooks/useRegistrationOrder'
@@ -28,10 +27,10 @@ export const RegistrationOrder: FC = () => {
     return <AppLoader />
   }
 
-  if (!foundCar) {
-    navigate(ROUTES.REGISTRATION_ARRIVAL)
-    return null
-  }
+  // if (!foundCar) {
+  //   navigate(ROUTES.REGISTRATION_ARRIVAL)
+  //   return null
+  // }
 
   return (
     <Grid container flexDirection={'column'} alignItems={'center'}>
@@ -57,7 +56,7 @@ export const RegistrationOrder: FC = () => {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
                     name: 'gosNum',
                     labelOver: t('registrationPage.order.form.gosNum'),
-                    value: foundCar.gosNum,
+                    value: foundCar?.gosNum,
                     disabled: true,
                   },
                   {
@@ -65,7 +64,7 @@ export const RegistrationOrder: FC = () => {
                     name: 'carBrand',
                     labelOver: t('registrationPage.order.form.carBrand'),
                     disabled: true,
-                    value: foundCar.model,
+                    value: foundCar?.model,
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
@@ -86,8 +85,8 @@ export const RegistrationOrder: FC = () => {
                   },
                   {
                     inputType: GENERATOR_INPUT_TYPE.DATE_TIME_PICKER,
-                    name: 'outPlanDate',
-                    labelOver: t('registrationPage.order.form.outPlanDate'),
+                    name: 'outDate',
+                    labelOver: t('registrationPage.order.form.outDate'),
                   },
                 ],
                 name: 'row2',

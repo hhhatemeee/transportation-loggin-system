@@ -19,7 +19,7 @@ const defaultValues: RegistrationOrderForm = {
   carBrand: '',
   counterpart: '',
   incomingDate: null,
-  outPlanDate: null,
+  outDate: null,
   waybill: '',
   nameDriver: '',
   services: null,

@@ -7,7 +7,6 @@ import { FormGenerator } from '../../components/FormGenerator'
 
 import { PageTitle } from '../../components/PageTitle'
 import { DictionaryClientContext } from '../../pages/DictionaryClients'
-import { useAddClientMutation } from '../../redux/api/clients.api'
 import { DictionaryClientForm, GENERATOR_INPUT_TYPE } from '../../types'
 
 const defaultValues: DictionaryClientForm = {

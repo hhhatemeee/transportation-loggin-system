@@ -1,9 +1,12 @@
+import { JOURNAL_STATUS } from '../../constants'
+
 export type POSTJournalType = {
   incomingDate: string
-  outPlanDate: string
+  outDate: string
   carId: number
   waybill: string
   nameDriver: string
+  status: JOURNAL_STATUS
 }
 
 export type GETJournalType = {

@@ -1,6 +1,6 @@
 import { UseFormReset } from 'react-hook-form'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ROUTES } from '../../../constants'
+import { JOURNAL_STATUS, ROUTES } from '../../../constants'
 import {
   GETCarType,
   GETJournalType,
@@ -23,13 +23,20 @@ export const useHandlers = ({ registrateOrder, reset, foundCar }: UseHandlersPro
 
   const handleRegistration = ({
     incomingDate,
-    outPlanDate,
+    outDate,
     nameDriver,
     waybill,
   }: RegistrationOrderForm) => {
-    if (incomingDate && outPlanDate && foundCar) {
+    if (incomingDate && outDate && foundCar) {
       // TODO: Исправить ДТО на бэке, не хватает двух полей
-      registrateOrder({ carId: foundCar.id, incomingDate, outPlanDate, nameDriver, waybill })
+      registrateOrder({
+        carId: foundCar.id,
+        status: JOURNAL_STATUS.OPEN,
+        incomingDate,
+        outDate,
+        nameDriver,
+        waybill,
+      })
         .unwrap()
         .then(() => reset())
     }
