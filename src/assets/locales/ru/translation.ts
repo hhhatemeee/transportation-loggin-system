@@ -12,6 +12,10 @@ export const localizationRu = {
   buttons: {
     addButton: 'Добавить',
   },
+  modal: {
+    closeBtnText: 'Закрыть',
+    saveBtnText: 'Сохранить',
+  },
   registrationCarPage: {
     title: 'Регистрация',
     form: {
@@ -27,6 +31,10 @@ export const localizationRu = {
     },
     departure: {
       submitButton: 'Убыл',
+      table: {
+        completed: 'Выполнено',
+        canceled: 'Отменено',
+      },
     },
     arrival: {
       submitButton: 'Прибыл',

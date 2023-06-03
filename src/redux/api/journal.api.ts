@@ -1,4 +1,10 @@
-import { GETJournalType, POSTJournalType, PUTJournalType } from '../../types'
+import {
+  GETJournalParams,
+  GETJournalType,
+  POSTJournalType,
+  PUTJournalType,
+  UPDATEJournalStatusPayload,
+} from '../../types'
 import { commonAPI } from './common.api'
 
 export const journalAPI = commonAPI.injectEndpoints({
@@ -29,11 +35,20 @@ export const journalAPI = commonAPI.injectEndpoints({
         body,
       }),
     }),
-    getJournal: build.query<GETJournalType[], void>({
-      query: () => ({
+    getJournal: build.query<GETJournalType[], GETJournalParams>({
+      query: params => ({
         url: '/journal/journals',
         method: 'GET',
+        params,
       }),
+      providesTags: ['JOURNALS'],
+    }),
+    updateStatusJournalById: build.mutation<void, UPDATEJournalStatusPayload>({
+      query: ({ id, status }) => ({
+        url: `/journal/${id}/status/${status}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['JOURNALS'],
     }),
   }),
 })
@@ -44,4 +59,5 @@ export const {
   useGetJournalByIdQuery,
   useUpdateJournalMutation,
   useGetJournalQuery,
+  useUpdateStatusJournalByIdMutation,
 } = journalAPI

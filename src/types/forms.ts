@@ -76,6 +76,5 @@ export type RegistrationOrderForm = {
   outDate: string | null
   waybill: string
   nameDriver: string
-  services: AutocompleteOption | null
   comment: string
 }

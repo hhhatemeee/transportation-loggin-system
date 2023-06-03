@@ -12,7 +12,7 @@ import { ExtraOptions, ReturnRefreshTokenType } from '../../types'
 import { setLogin } from '../reducers/auth.reducer'
 import { showMessage } from '../reducers/snackbar.reducer'
 
-export const tagTypes = []
+export const tagTypes = ['JOURNALS']
 
 const baseQuery = fetchBaseQuery({
   baseUrl: URLS.BASE_URL,

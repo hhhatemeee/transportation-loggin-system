@@ -1,3 +1,5 @@
+import { GETClientType } from './client'
+
 export type POSTCarType = {
   gosNum: string
   sts: string
@@ -7,6 +9,7 @@ export type POSTCarType = {
 
 export type GETCarType = {
   id: number
-} & POSTCarType
+  client: GETClientType
+} & Omit<POSTCarType, 'clientId'>
 
-export type PUTCarType = GETCarType
+export type PUTCarType = POSTCarType & { id: number }

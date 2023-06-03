@@ -5,9 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../constants'
 import { useFindCarByGosNumMutation } from '../../redux/api'
 import { STSForm } from '../../types'
-import { FormRegistration } from '../Registration/components/FormRegistration'
-import { StateNumber } from '../Registration/components/StateNumber'
-import { STS } from '../Registration/components/STS'
+import { FormRegistration } from '../RegistrationCar/components/FormRegistration'
+import { StateNumber } from '../RegistrationCar/components/StateNumber'
 
 export const RegistrationArrival: FC = () => {
   const { t } = useTranslation()
@@ -27,7 +26,7 @@ export const RegistrationArrival: FC = () => {
       stateNumberTab={
         <StateNumber
           onSubmit={handleArrive}
-          submitBtnText={t('registrationPage.arrival.submitButton')}
+          submitBtnText={t('registrationCarPage.arrival.submitButton')}
         />
       }
     />

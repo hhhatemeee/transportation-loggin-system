@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, Location } from 'react-router-dom'
+
 import {
   useAddJournalMutation,
   useFindCarByGosNumMutation,
@@ -22,19 +22,21 @@ const defaultValues: RegistrationOrderForm = {
   outDate: null,
   waybill: '',
   nameDriver: '',
-  services: null,
   comment: '',
 }
 
 export const useRegistrationOrder = () => {
   const {
-    state: { clientId },
+    state: {
+      client: { id: clientId },
+    },
   } = useLocation() as OrderLocationType
   const methods = useForm<RegistrationOrderForm>({ defaultValues })
   const {
     handleSubmit,
     reset,
     formState: { isDirty },
+    getValues,
   } = methods
   const {
     data: client,
@@ -58,17 +60,12 @@ export const useRegistrationOrder = () => {
 
   const { data, handlers } = useHandlers({ registrateOrder, reset, foundCar })
 
-  const servicesOptions = useMemo(
-    () => services?.map(({ id, name }) => ({ id, label: name })) || [],
-    [services]
-  )
-
   return {
     data: {
       ...data,
       foundCar,
       client,
-      services,
+      services: services || [],
       methods,
     },
     state: {
@@ -76,11 +73,11 @@ export const useRegistrationOrder = () => {
       isDirty,
       loadingClient,
       loadingService,
-      servicesOptions,
     },
     handlers: {
       ...handlers,
       handleSubmit,
+      getFormValues: getValues,
     },
   }
 }
