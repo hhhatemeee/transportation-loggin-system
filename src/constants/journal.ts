@@ -1,0 +1,5 @@
+export enum JOURNAL_STATUS {
+  OPEN = 'OPEN',
+  COMPLETE = 'COMPLETE',
+  CANCEL = 'CANCEL',
+}

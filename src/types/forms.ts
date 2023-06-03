@@ -69,13 +69,12 @@ export type DictionaryClientForm = {
 }
 
 export type RegistrationOrderForm = {
-  stateNumber: string
+  gosNum: string
   carBrand: string
   counterpart: string
-  dateStart: string | null
-  dateEnd: string | null
-  listNumber: string
-  fio: string
-  services: AutocompleteOption | null
+  incomingDate: string | null
+  outDate: string | null
+  waybill: string
+  nameDriver: string
   comment: string
 }

@@ -5,7 +5,7 @@ export const ROUTES = {
   REFRESH_TOKEN: '/auth/refresh',
   REGISTRATION_CAR: '/registration',
   REGISTRATION_ARRIVAL: '/registration/arrival',
-  REGISTRATION_ORDER: '/registration/arrival/:code',
+  REGISTRATION_ORDER: '/registration/arrival/:gosNum',
   REGISTRATION_DEPARTURE: '/registration/departure',
   HISTORY: '/history',
   REPORTS: '/reports',

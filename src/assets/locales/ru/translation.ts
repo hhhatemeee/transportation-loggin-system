@@ -12,6 +12,10 @@ export const localizationRu = {
   buttons: {
     addButton: 'Добавить',
   },
+  modal: {
+    closeBtnText: 'Закрыть',
+    saveBtnText: 'Сохранить',
+  },
   registrationCarPage: {
     title: 'Регистрация',
     form: {
@@ -27,6 +31,10 @@ export const localizationRu = {
     },
     departure: {
       submitButton: 'Убыл',
+      table: {
+        completed: 'Выполнено',
+        canceled: 'Отменено',
+      },
     },
     arrival: {
       submitButton: 'Прибыл',
@@ -34,13 +42,13 @@ export const localizationRu = {
     order: {
       title: 'Заполнение заказа',
       form: {
-        stateNumber: 'Гос. номер',
+        gosNum: 'Гос. номер',
         carBrand: 'Марка автомобиля',
         counterpart: 'Контрагент',
-        dateStart: 'Дата заезда',
-        dateEnd: 'Дата выезда',
-        listNumber: 'Номер путевого листа',
-        fio: 'ФИО водителя',
+        incomingDate: 'Дата заезда',
+        outDate: 'Дата выезда',
+        waybill: 'Номер путевого листа',
+        nameDriver: 'ФИО водителя',
         services: 'Услуги',
         comment: 'Комментарий',
       },

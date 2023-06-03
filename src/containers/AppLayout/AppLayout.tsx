@@ -1,12 +1,9 @@
 import { Container, CssBaseline } from '@mui/material'
 import { FC, ReactNode, useState } from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
 
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
-import { ROUTES } from '../../constants'
 import { useSidebar } from '../../hooks'
-import { useAuth } from '../../hooks/auth'
 
 type AppLayoutProps = {
   children: ReactNode

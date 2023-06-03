@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/auth'
 import { AppLayout } from '../AppLayout'
 
 export const PrivateRoute = () => {
+  // состояние авторизации берется из стейта созданного в auth Slice
   const { isAuth } = useAuth()
 
   return isAuth ? (
