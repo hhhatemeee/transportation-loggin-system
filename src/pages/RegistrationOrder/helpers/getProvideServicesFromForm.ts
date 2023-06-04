@@ -1,7 +1,9 @@
 import { REGEX } from '../../../constants'
-import { RegistrationOrderForm, ProvideServiceType } from '../../../types'
+import { RegistrationOrderForm, POSTProvideServiceType } from '../../../types'
 
-export const getProvideServicesFromForm = (values: RegistrationOrderForm): ProvideServiceType[] => {
+export const getProvideServicesFromForm = (
+  values: RegistrationOrderForm
+): POSTProvideServiceType[] => {
   const result = []
 
   for (const key in values) {

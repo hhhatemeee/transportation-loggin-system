@@ -96,11 +96,11 @@ export const localizationRu = {
   historyPage: {
     title: 'История услуг',
     columns: {
-      number: 'Номер заказа',
-      stateNumber: 'Гос. номер ТС',
-      date: 'Дата заезда ТС',
-      time: 'Время заезда ТС',
-      service: 'Услуга',
+      waybill: 'Номер заказа',
+      gosNum: 'Гос. номер ТС',
+      incomingDate: 'Дата и время заезда ТС',
+      services: 'Услуги',
+      status: 'Статус',
     },
   },
   reports: {
