@@ -2,6 +2,7 @@ import {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
+  FetchBaseQueryMeta,
   createApi,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react'
@@ -14,26 +15,35 @@ import { showMessage } from '../reducers/snackbar.reducer'
 
 export const tagTypes = ['JOURNALS']
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: URLS.BASE_URL,
-  credentials: 'same-origin',
-  prepareHeaders: headers => {
-    const token = Cookies.get(COOKIES_DATA.ACCESS_TOKEN)
+// Добавил аргумент refreshToken, т.к. на бэке не принимаются токены из Cookies
+const baseQuery = (refreshToken?: string) =>
+  fetchBaseQuery({
+    baseUrl: URLS.BASE_URL,
+    credentials: 'same-origin',
+    prepareHeaders: headers => {
+      const token = Cookies.get(COOKIES_DATA.ACCESS_TOKEN)
 
-    if (token) {
-      headers.set('authorization', token)
-    }
+      if (token) {
+        headers.set('authorization', refreshToken || token)
+      }
 
-    return headers
-  },
-})
+      return headers
+    },
+  })
 
-const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions)
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  {},
+  FetchBaseQueryMeta
+> = async (args, api, extraOptions) => {
+  let result = await baseQuery()(args, api, extraOptions)
 
   if (result?.error?.status === 401) {
     const refreshToken = Cookies.get(COOKIES_DATA.REFRESH_TOKEN)
-    const refreshResult = await baseQuery(
+    const refreshResult = await baseQuery(refreshToken)(
       {
         url: ROUTES.REFRESH_TOKEN,
         method: 'POST',
@@ -42,12 +52,22 @@ const baseQueryWithReauth: typeof baseQuery = async (args, api, extraOptions) =>
       api,
       extraOptions
     )
+    // Для случаев когда умер рефреш токен
+    if (refreshResult.error && refreshResult.error.status === 401) {
+      api.dispatch(
+        showMessage({
+          type: !result.error ? 'success' : 'error',
+          message: JSON.stringify(refreshResult.error.data),
+          statusCode: 401,
+        })
+      )
+    }
 
     if (refreshResult.data) {
       // Didn't find a solution how to type data
       api.dispatch(setLogin(refreshResult.data as ReturnRefreshTokenType))
 
-      result = await baseQuery(args, api, extraOptions)
+      result = await baseQuery()(args, api, extraOptions)
     } else {
       api.dispatch(setLogin(null))
     }
@@ -69,7 +89,7 @@ const baseQueryWithNotification: BaseQueryFn<
   const resultErrorData = result.error ? JSON.stringify(result.error.data) : undefined
   const showNotification = extraOptions?.showNotification ?? true
 
-  if (isValidRequest && showNotification) {
+  if (isValidRequest && showNotification && result.meta?.response?.status !== 401) {
     api.dispatch(
       showMessage({
         type: !result.error ? 'success' : 'error',

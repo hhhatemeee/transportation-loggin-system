@@ -44,6 +44,13 @@ export const journalAPI = commonAPI.injectEndpoints({
       }),
       providesTags: ['JOURNALS'],
     }),
+    getJournals: build.mutation<GETJournalType[], GETJournalParams>({
+      query: params => ({
+        url: '/journal/journals',
+        method: 'GET',
+        params,
+      }),
+    }),
     updateStatusJournalById: build.mutation<void, UPDATEJournalStatusPayload>({
       query: ({ id, status }) => ({
         url: `/journal/${id}/status/${status}`,
@@ -60,5 +67,6 @@ export const {
   useGetJournalByIdQuery,
   useUpdateJournalMutation,
   useGetJournalQuery,
+  useGetJournalsMutation,
   useUpdateStatusJournalByIdMutation,
 } = journalAPI

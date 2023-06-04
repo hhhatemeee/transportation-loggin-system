@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, Location } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ import {
 } from '../../../redux/api'
 import { GETCarType, RegistrationOrderForm } from '../../../types'
 import { useHandlers } from './useHandlers'
+import { convertArrayServicesToDefaultValues } from '../../../helpers'
 
 type OrderLocationType = {
   state: GETCarType
@@ -59,6 +61,13 @@ export const useRegistrationOrder = () => {
   const loadingService = isLoadingService || isFetchingService
 
   const { data, handlers } = useHandlers({ registrateOrder, reset, foundCar })
+
+  useEffect(() => {
+    if (services) {
+      const servicesObject = convertArrayServicesToDefaultValues(services)
+      reset({ ...getValues(), ...servicesObject })
+    }
+  }, [services])
 
   return {
     data: {

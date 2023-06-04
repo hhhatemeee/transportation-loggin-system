@@ -40,6 +40,9 @@ export const localizationRu = {
       submitButton: 'Прибыл',
     },
     order: {
+      dialog: {
+        title: 'Колличество услуг',
+      },
       title: 'Заполнение заказа',
       form: {
         gosNum: 'Гос. номер',
@@ -131,9 +134,9 @@ export const localizationRu = {
     statistics: {
       title: 'Отчеты. Статистика',
       columns: {
-        counterpart: 'Контрагент',
-        dateStart: 'Дата начала',
-        dateEnd: 'Дата конца',
+        client: 'Контрагент',
+        incomingDate: 'Дата начала',
+        outDate: 'Дата конца',
         allServices: 'Всего услуг за период',
         amount: 'Сумма',
       },
@@ -177,6 +180,10 @@ export const localizationRu = {
     },
     contracts: {
       title: 'Справочники. Договоры',
+      settingCostsBtn: 'Настроить цены',
+      dialog: {
+        title: 'Настройка цен для услуг',
+      },
       form: {
         dateStart: {
           label: 'Дата начала договора',

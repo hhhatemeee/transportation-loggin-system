@@ -16,10 +16,15 @@ export const History: FC = () => {
   const [findGosNum, setFindGosNum] = useState('')
   const methods = useForm<HistoryForm>({ defaultValues: { gosNum: '' } })
   const { handleSubmit } = methods
-  const { data: journalsHistory } = useGetJournalQuery({
+  const {
+    data: journalsHistory,
+    isLoading,
+    isFetching,
+  } = useGetJournalQuery({
     gosNum: findGosNum || undefined,
     status: JOURNAL_STATUS.COMPLETE,
   })
+  const loading = isLoading || isFetching
 
   const handleSearch = ({ gosNum }: { gosNum: string }) => {
     setFindGosNum(gosNum)
@@ -55,7 +60,7 @@ export const History: FC = () => {
         </Grid>
       </Grid>
       <Grid item>
-        <DataGrid columns={HISTORY_COLUMNS} rows={journalsHistory || []} />
+        <DataGrid columns={HISTORY_COLUMNS} rows={journalsHistory || []} loading={loading} />
       </Grid>
     </Grid>
   )
