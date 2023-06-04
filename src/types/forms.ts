@@ -20,7 +20,7 @@ export type RegistrationForm = {
 export type StateNumberForm = STSForm
 
 export type HistoryForm = {
-  stateNumber: string
+  gosNum: string
 }
 
 export type CounterpartiesForm = {

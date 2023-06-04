@@ -21,6 +21,7 @@ export const journalAPI = commonAPI.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['JOURNALS'],
     }),
     deleteJournal: build.mutation<GETJournalType, number>({
       query: id => ({

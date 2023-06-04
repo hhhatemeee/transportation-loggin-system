@@ -4,18 +4,42 @@ import { GridColumns } from '@mui/x-data-grid'
 import i18next from '../i18n'
 import { Button } from '../components/Button'
 import { GETJournalType } from '../types'
+import { getConvertStatus } from '../helpers/getConvertStatus'
 
-export const HISTORY_COLUMNS = [
-  { field: 'number', headerName: i18next.t('historyPage.columns.number'), flex: 1, minWidth: 50 },
+export const HISTORY_COLUMNS: GridColumns<GETJournalType> = [
+  { field: 'waybill', headerName: i18next.t('historyPage.columns.waybill'), flex: 1, minWidth: 50 },
   {
-    field: 'stateNumber',
-    headerName: i18next.t('historyPage.columns.stateNumber'),
+    field: 'gosNum',
+    headerName: i18next.t('historyPage.columns.gosNum'),
     flex: 1,
     minWidth: 50,
+    valueGetter: params => params.row.car.gosNum,
   },
-  { field: 'date', headerName: i18next.t('historyPage.columns.date'), flex: 1, minWidth: 50 },
-  { field: 'time', headerName: i18next.t('historyPage.columns.time'), flex: 1, minWidth: 50 },
-  { field: 'service', headerName: i18next.t('historyPage.columns.service'), flex: 1, minWidth: 50 },
+  {
+    field: 'incomingDate',
+    headerName: i18next.t('historyPage.columns.incomingDate'),
+    flex: 1,
+    minWidth: 50,
+    valueGetter: params =>
+      new Date(params.row.incomingDate).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }),
+  },
+  {
+    field: 'services',
+    headerName: i18next.t('historyPage.columns.services'),
+    flex: 1,
+    minWidth: 50,
+    valueGetter: params =>
+      params.row.provideServices
+        .map(({ count, service }) => `${service.name} - ${count}`)
+        .join(', '),
+  },
+  {
+    field: 'status',
+    headerName: i18next.t('historyPage.columns.status'),
+    flex: 1,
+    minWidth: 50,
+    valueFormatter: params => getConvertStatus(params.value),
+  },
 ]
 
 export const COUNTERPARTIES_COLUMNS = HISTORY_COLUMNS
