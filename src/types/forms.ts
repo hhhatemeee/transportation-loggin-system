@@ -24,7 +24,7 @@ export type HistoryForm = {
 }
 
 export type CounterpartiesForm = {
-  counterparties: string
+  client: AutocompleteOption | null
   date: [string, string] | [null, string] | [string, null] | [null, null]
 }
 

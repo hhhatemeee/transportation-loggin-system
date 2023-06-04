@@ -11,7 +11,7 @@ import { usePrompt } from '../../hooks'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 import { useRegistrationOrder } from './hooks/useRegistrationOrder'
 import { getCountUsedServicesInForm } from './helpers/getCountUsedServicesInForm'
-import { ServicesDialog } from './components/ServicesDialog'
+import { ServicesDialog } from '../../components/ServicesDialog'
 
 export const RegistrationOrder: FC = () => {
   const [servicesShow, setServicesShow] = useState(false)
@@ -123,6 +123,7 @@ export const RegistrationOrder: FC = () => {
               isShow={servicesShow}
               onClose={handleSetServicesShow}
               services={services}
+              title={t('registrationCarPage.order.dialog.title')}
             />
           </Grid>
           <FormGenerator

@@ -3,8 +3,8 @@ import { GridColumns } from '@mui/x-data-grid'
 
 import i18next from '../i18n'
 import { Button } from '../components/Button'
-import { GETJournalType } from '../types'
-import { getConvertStatus } from '../helpers/getConvertStatus'
+import { GETJournalType, GETReportType } from '../types'
+import { getConvertStatus } from '../helpers'
 
 export const HISTORY_COLUMNS: GridColumns<GETJournalType> = [
   { field: 'waybill', headerName: i18next.t('historyPage.columns.waybill'), flex: 1, minWidth: 50 },
@@ -44,33 +44,38 @@ export const HISTORY_COLUMNS: GridColumns<GETJournalType> = [
 
 export const COUNTERPARTIES_COLUMNS = HISTORY_COLUMNS
 
-export const STATISTICS_COLUMNS = [
+export const STATISTICS_COLUMNS: GridColumns<GETReportType> = [
   {
-    field: 'counterpart',
-    headerName: i18next.t('reports.statistics.columns.counterpart'),
+    field: 'client',
+    headerName: i18next.t('reports.statistics.columns.client'),
     flex: 1,
     minWidth: 50,
+    valueGetter: ({ row: { clientId } }) => clientId,
   },
   {
-    field: 'dateStart',
-    headerName: i18next.t('reports.statistics.columns.dateStart'),
+    field: 'incomingDateMin',
+    headerName: i18next.t('reports.statistics.columns.incomingDate'),
     flex: 1,
     minWidth: 50,
+    valueFormatter: params =>
+      new Date(params.value).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }),
   },
   {
-    field: 'dateEnd',
-    headerName: i18next.t('reports.statistics.columns.dateEnd'),
+    field: 'incomingDateMax',
+    headerName: i18next.t('reports.statistics.columns.outDate'),
     flex: 1,
     minWidth: 50,
+    valueFormatter: params =>
+      new Date(params.value).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' }),
   },
   {
-    field: 'allServices',
+    field: 'count',
     headerName: i18next.t('reports.statistics.columns.allServices'),
     flex: 1,
     minWidth: 50,
   },
   {
-    field: 'amount',
+    field: 'cost',
     headerName: i18next.t('reports.statistics.columns.amount'),
     flex: 1,
     minWidth: 50,

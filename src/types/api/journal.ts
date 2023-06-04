@@ -33,7 +33,7 @@ export type GETJournalParams = {
   status?: JOURNAL_STATUS
   sts?: string
   gosNum?: string
-  clientId?: string
+  clientId?: number
   startDate?: string
   endDate?: string
 }

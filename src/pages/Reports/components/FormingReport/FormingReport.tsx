@@ -1,19 +1,37 @@
-import { Grid, Button } from '@mui/material'
+import { Grid, Button, IconButton } from '@mui/material'
+import { RestartAlt } from '@mui/icons-material'
 import { t } from 'i18next'
 import { FC } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 
 import { FormGenerator } from '../../../../components/FormGenerator'
 import { CounterpartiesForm, GENERATOR_INPUT_TYPE } from '../../../../types'
+import { AutocompleteOption } from '../../../../components/AutoComplete'
 
 type FormingReportProps = {
   onSubmit: (data: CounterpartiesForm) => void
+  clientsOptions: AutocompleteOption[]
+  onReset: () => void
+  loading?: boolean
 }
-export const FormingReport: FC<FormingReportProps> = ({ onSubmit }) => {
+
+const defaultValues: CounterpartiesForm = { client: null, date: [null, null] }
+
+export const FormingReport: FC<FormingReportProps> = ({
+  onSubmit,
+  clientsOptions,
+  onReset,
+  loading,
+}) => {
   const methods = useForm<CounterpartiesForm>({
-    defaultValues: { counterparties: '', date: [null, null] },
+    defaultValues,
   })
-  const { handleSubmit } = methods
+  const { handleSubmit, reset } = methods
+
+  const handleReset = () => {
+    reset(defaultValues)
+    onReset()
+  }
 
   return (
     <Grid container spacing={2} alignItems={'center'} mb={1}>
@@ -23,10 +41,12 @@ export const FormingReport: FC<FormingReportProps> = ({ onSubmit }) => {
             isRow
             inputs={[
               {
-                name: 'counterparties',
-                inputType: GENERATOR_INPUT_TYPE.TEXTFIELD,
+                name: 'client',
+                inputType: GENERATOR_INPUT_TYPE.AUTOCOMPLETE,
                 labelOver: t('reports.counterparties.form.counterparties.label'),
+                autocompleteOptions: clientsOptions,
                 size: 'medium',
+                loading,
               },
               {
                 name: 'date',
@@ -45,6 +65,11 @@ export const FormingReport: FC<FormingReportProps> = ({ onSubmit }) => {
         <Button onClick={handleSubmit(onSubmit)} variant='contained' sx={{ py: 1.5, mb: 1 }}>
           {t('reports.counterparties.submitButton')}
         </Button>
+      </Grid>
+      <Grid item mb={1}>
+        <IconButton onClick={handleReset}>
+          <RestartAlt />
+        </IconButton>
       </Grid>
     </Grid>
   )
