@@ -2,11 +2,18 @@ import { FC, FocusEventHandler, ReactElement } from 'react'
 
 import { RegisterOptions } from 'react-hook-form'
 import { Grid, SxProps, Theme } from '@mui/material'
+import moment from 'moment'
 
 import { FormLabel } from './FormLabel'
 import { TextFieldController } from '../../controllers/TextFieldController'
 import { GENERATOR_INPUT_TYPE } from '../../types'
 import { InputController } from '../../controllers/InputController'
+import { DatePickerRangeController } from '../../controllers/DateTimePickerController/DatePickerRangeController'
+import { DateRangeValue, LabelRangeType } from '../DatePickerRange'
+import { CheckboxController } from '../../controllers/CheckboxController'
+import { AutoCompleteController } from '../../controllers/AutoCompleteController'
+import { AutocompleteOption } from '../AutoComplete'
+import { DateTimePickerController } from '../../controllers/DateTimePickerController'
 
 type CommonFormInputProps = {
   className?: string
@@ -22,6 +29,7 @@ type CommonFormInputProps = {
   variant?: 'outlined' | 'filled' | 'standard'
   sx?: SxProps<Theme>
   labelOver?: string
+  labelLimit?: boolean
 }
 
 type InputFormProps = {
@@ -32,11 +40,27 @@ type InputFormProps = {
   onBlurInput?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
 }
 
+export type DateRangeFormInputProps = {
+  labelRange?: LabelRangeType
+}
+
+type AutoCompleteFormProps = {
+  autocompleteOptions?: AutocompleteOption[]
+  getOptionLabel?: ((option: AutocompleteOption) => string) | undefined
+  isOptionEqualToValue?:
+    | ((option: AutocompleteOption, value: AutocompleteOption) => boolean)
+    | undefined
+  multiple?: boolean
+  getOptionDisabled?: ((option: AutocompleteOption) => boolean) | undefined
+}
+
 export type FormInputProps = {
   name: string
   inputType: GENERATOR_INPUT_TYPE
 } & CommonFormInputProps &
-  InputFormProps
+  InputFormProps &
+  DateRangeFormInputProps &
+  AutoCompleteFormProps
 
 export const FormInput: FC<FormInputProps> = ({
   rules,
@@ -47,7 +71,7 @@ export const FormInput: FC<FormInputProps> = ({
   disabled,
   placeholder,
   type,
-  size = 'small',
+  size = 'medium',
   replacePattern,
   replaceBy = '',
   maxLengthInput = 255,
@@ -58,12 +82,57 @@ export const FormInput: FC<FormInputProps> = ({
   className,
   value,
   labelOver,
+  labelRange,
+  labelLimit = true,
+  autocompleteOptions,
+  getOptionDisabled,
+  getOptionLabel,
+  isOptionEqualToValue,
+  loading,
+  multiple,
 }) => {
+  const getValue = () => {
+    switch (inputType) {
+      case GENERATOR_INPUT_TYPE.DATE_TIME_PICKER:
+        return typeof value === 'string' ? value : null
+      case GENERATOR_INPUT_TYPE.DATE_RANGE_PICKER:
+        return Array.isArray(value) && !value.some(el => el instanceof Date)
+          ? [moment(value[0]).format(), moment(value[1]).format()]
+          : [null, null]
+      default:
+        return value
+    }
+  }
+
   const renderInput = (): ReactElement => {
     switch (inputType) {
       case GENERATOR_INPUT_TYPE.TEXTFIELD:
         return (
           <TextFieldController
+            label={labelOver}
+            fullWidth
+            onBlur={onBlurInput}
+            size={size}
+            placeholder={placeholder ?? placeholder}
+            name={name}
+            InputProps={{ readOnly: readOnly }}
+            rules={rules}
+            disabled={disabled}
+            type={type}
+            maxLength={maxLengthInput}
+            replacePattern={replacePattern}
+            replaceBy={replaceBy}
+            value={value}
+            variant={variant}
+            sx={sx}
+            className={className}
+          />
+        )
+      case GENERATOR_INPUT_TYPE.TEXTAREA:
+        return (
+          <TextFieldController
+            multiline
+            rows={5}
             label={labelOver}
             fullWidth
             onBlur={onBlurInput}
@@ -103,6 +172,69 @@ export const FormInput: FC<FormInputProps> = ({
             className={className}
           />
         )
+      case GENERATOR_INPUT_TYPE.DATE_RANGE_PICKER:
+        return (
+          <DatePickerRangeController
+            fullWidth
+            readOnly={readOnly}
+            rules={rules}
+            name={name}
+            disabled={disabled}
+            value={getValue() as [DateRangeValue, DateRangeValue]}
+            size={size}
+            className={className}
+            labelRange={labelRange}
+          />
+        )
+      case GENERATOR_INPUT_TYPE.DATE_TIME_PICKER:
+        return (
+          <DateTimePickerController
+            fullWidth
+            readOnly={readOnly}
+            rules={rules}
+            name={name}
+            disabled={disabled}
+            value={getValue() as string | null}
+            size={size}
+            label={labelOver}
+            className={className}
+          />
+        )
+      case GENERATOR_INPUT_TYPE.CHECKBOX:
+        return (
+          <CheckboxController
+            rules={rules}
+            name={name}
+            disabled={disabled}
+            value={getValue()}
+            sx={sx}
+          />
+        )
+      case GENERATOR_INPUT_TYPE.AUTOCOMPLETE:
+        return (
+          <AutoCompleteController
+            fullWidth
+            size={size}
+            name={name}
+            disableCloseOnSelect={multiple}
+            defaultValue={multiple ? [] : {}}
+            loading={loading}
+            isOptionEqualToValue={isOptionEqualToValue}
+            id={name}
+            getOptionLabel={getOptionLabel}
+            options={autocompleteOptions ?? []}
+            rules={rules}
+            multiple={multiple}
+            disabled={disabled}
+            placeholder={placeholder}
+            value={getValue()}
+            variant={variant}
+            sx={sx}
+            getOptionDisabled={getOptionDisabled}
+            label={labelOver}
+            className={className}
+          />
+        )
       default:
         return <></>
     }
@@ -120,6 +252,7 @@ export const FormInput: FC<FormInputProps> = ({
         label={label}
         labelPlacement={labelPlacement}
         control={renderInput()}
+        labelLimit={labelLimit}
       />
     </Grid>
   )
